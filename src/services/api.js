@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios'
 
 const api = axios.create({
-    baseURL: "http://178.238.237.71:3006",
-});
+	baseURL: import.meta.env.VITE_API_BASE_URL ?? 'https://iesantarosa.ctiunsm.com/api',
+})
 
-export default api;
+export default api

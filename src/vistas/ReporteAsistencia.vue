@@ -75,21 +75,24 @@
             <span v-if="errores.dni" class="error-campo">{{ errores.dni }}</span>
           </div>
 
-          <!-- Campo Año Lectivo -->
-          <div class="campo" :class="{ 'campo-error': errores.anio }">
-            <label>Año Lectivo</label>
+          <!-- Campo Periodo -->
+          <div class="campo" :class="{ 'campo-error': errores.periodo }">
+            <label>Periodo</label>
             <div class="input-wrap">
               <span class="input-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="#94a3b8">
                   <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"/>
                 </svg>
               </span>
-              <select v-model="anioLectivo" @change="limpiarError('anio')">
-                <option v-for="anio in aniosDisponibles" :key="anio" :value="anio">{{ anio }}</option>
+              <select v-model="periodoSeleccionado" :disabled="cargandoPeriodos">
+                <option v-if="cargandoPeriodos" value="">Cargando periodos...</option>
+                <option v-for="p in periodos" :key="p.codperiod" :value="p.codperiod">
+                  {{ p.name }}{{ p.is_active === 'Y' ? ' ✦' : '' }}
+                </option>
               </select>
               <span class="select-arrow" aria-hidden="true">▾</span>
             </div>
-            <span v-if="errores.anio" class="error-campo">{{ errores.anio }}</span>
+            <span v-if="errores.periodo" class="error-campo">{{ errores.periodo }}</span>
           </div>
 
           <!-- Campo Desde -->
@@ -137,10 +140,10 @@
         <section class="resumen-section">
           <div class="resumen-head">
             <div>
-              <h3>Resumen Visual</h3>
-              <p class="resumen-sub">Distribución de asistencia mensual</p>
+              <h3>Resumen Visual — {{ nombreEstudiante }}</h3>
+              <p class="resumen-sub">Distribución de asistencia del periodo seleccionado</p>
             </div>
-            <span class="nivel-badge">NIVEL PRIMARIA</span>
+            <span class="nivel-badge">{{ gradoSeccion }}</span>
           </div>
 
           <div class="resumen-grid">
@@ -155,29 +158,29 @@
                 <div class="legend-item">
                   <span class="dot dot--asistencia"></span>
                   <span class="legend-label">ASISTENCIAS</span>
-                  <span class="legend-val">80%</span>
+                  <span class="legend-val">{{ pctPresente }}%</span>
                 </div>
                 <div class="legend-item">
                   <span class="dot dot--tardanza"></span>
                   <span class="legend-label">TARDANZAS</span>
-                  <span class="legend-val">12%</span>
+                  <span class="legend-val">{{ pctTardanza }}%</span>
                 </div>
                 <div class="legend-item">
                   <span class="dot dot--falta"></span>
                   <span class="legend-label">FALTAS</span>
-                  <span class="legend-val">8%</span>
+                  <span class="legend-val">{{ pctFalta }}%</span>
                 </div>
               </div>
             </div>
 
             <div class="resumen-card resumen-card--dias">
-              <span class="big-number">16</span>
+              <span class="big-number">{{ statsResumen.present }}</span>
               <span class="big-label">DÍAS ASISTIDOS</span>
             </div>
 
             <div class="resumen-card resumen-card--inasistencias">
               <div class="alert-icon" aria-hidden="true">!</div>
-              <span class="big-number">02</span>
+              <span class="big-number">{{ String(statsResumen.absent).padStart(2, '0') }}</span>
               <span class="big-label">INASISTENCIAS</span>
             </div>
           </div>
@@ -236,6 +239,16 @@
         </section>
       </template>
 
+      <!-- Estudiante no encontrado -->
+      <div v-else-if="noEncontrado" class="estado-inicial">
+        <div class="estado-inicial-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="#94a3b8">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+        </div>
+        <p>No se encontró ningún estudiante con el DNI <strong>{{ busquedaAlumno }}</strong>. Verifique el número e intente nuevamente.</p>
+      </div>
+
       <!-- Mensaje inicial amigable (cuando aún no se ha generado) -->
       <div v-else class="estado-inicial">
         <div class="estado-inicial-icon" aria-hidden="true">
@@ -250,85 +263,48 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import colegioImg from '@/assets/PortadaSRWEB.png'
+import api from '@/services/api'
 
-// Datos mock de asistencia
-const asistenciaMock = [
-  { fecha: '15 Oct, 2024', estado: 'Asistencia', hora: '07:45 AM', observacion: '—' },
-  { fecha: '14 Oct, 2024', estado: 'Tardanza', hora: '08:12 AM', observacion: 'Ingreso con justificación médica' },
-  { fecha: '13 Oct, 2024', estado: 'Falta', hora: '—', observacion: 'Inasistencia injustificada' },
-  { fecha: '12 Oct, 2024', estado: 'Asistencia', hora: '07:30 AM', observacion: '—' },
-  { fecha: '11 Oct, 2024', estado: 'Asistencia', hora: '07:50 AM', observacion: '—' },
-  { fecha: '10 Oct, 2024', estado: 'Tardanza', hora: '08:25 AM', observacion: 'Tránsito' },
-  { fecha: '09 Oct, 2024', estado: 'Asistencia', hora: '07:40 AM', observacion: '—' },
-  { fecha: '08 Oct, 2024', estado: 'Falta', hora: '—', observacion: 'Sin justificar' },
-]
+// ── Periodos (cargados al montar) ─────────────────────────────────────────
+const periodos           = ref([])
+const periodoSeleccionado = ref('')
+const cargandoPeriodos   = ref(false)
 
-// Estado de filtros
+onMounted(async () => {
+  cargandoPeriodos.value = true
+  try {
+    const { data } = await api.get('/attendance/periods')
+    periodos.value = data.periods ?? []
+    const activo = periodos.value.find(p => p.is_active === 'Y')
+    periodoSeleccionado.value = activo?.codperiod ?? periodos.value[0]?.codperiod ?? ''
+  } catch {
+    // si falla, el select queda vacío y el usuario lo nota
+  } finally {
+    cargandoPeriodos.value = false
+  }
+})
+
+// ── Filtros ───────────────────────────────────────────────────────────────
 const busquedaAlumno = ref('')
-const anioLectivo = ref(2026)
-const aniosDisponibles = [2026, 2025, 2024, 2023, 2022, 2021]
 const fechaDesde = ref('')
 const fechaHasta = ref('')
 
-// Filtra el input del DNI: solo permite dígitos, máximo 8.
-// Se ejecuta en cada pulsación (@input) para impedir que entren letras.
 const sanitizarDni = () => {
-  const limpio = busquedaAlumno.value.replace(/\D/g, '').slice(0, 8)
-  busquedaAlumno.value = limpio
+  busquedaAlumno.value = busquedaAlumno.value.replace(/\D/g, '').slice(0, 8)
 }
 
-// Bloquea la pulsación de teclas que no sean dígitos (refuerzo a nivel de keypress)
 const soloNumeros = (e) => {
-  const charCode = e.which ?? e.keyCode
-  // Permitir teclas de control: backspace, delete, flechas, tab, etc.
   if (e.ctrlKey || e.metaKey || e.altKey) return
-  if (charCode < 48 || charCode > 57) {
-    e.preventDefault()
-  }
+  const charCode = e.which ?? e.keyCode
+  if (charCode < 48 || charCode > 57) e.preventDefault()
 }
 
-// Estado de validación
-const errores = ref({})        // { general?: string, dni?: string, desde?: string, hasta?: string }
-const mensajeError = ref('')   // mensaje global de "complete todos los datos"
+// ── Validación ────────────────────────────────────────────────────────────
+const errores      = ref({})
+const mensajeError = ref('')
 
-// Estado de la UI
-const reporteGenerado = ref(false)   // <-- clave: oculta el resultado hasta generar
-const cargando = ref(false)
-const registrosFiltrados = ref([])
-const alumnoSeleccionado = ref('')
-
-// Paginación
-const paginaActual = ref(1)
-const registrosPorPagina = 4
-
-const totalPaginas = computed(() => Math.ceil(registrosFiltrados.value.length / registrosPorPagina))
-
-const registrosPaginados = computed(() => {
-  const inicio = (paginaActual.value - 1) * registrosPorPagina
-  const fin = inicio + registrosPorPagina
-  return registrosFiltrados.value.slice(inicio, fin)
-})
-
-const porcentajeTotal = computed(() => {
-  if (registrosFiltrados.value.length === 0) return 0
-  const total = registrosFiltrados.value.length
-  const presentes = registrosFiltrados.value.filter(r => r.estado !== 'Falta').length
-  return Math.round((presentes / total) * 100)
-})
-
-const donutBackground = computed(() => {
-  // 80% amarillo (asistencia) | 12% amarillo oscuro (tardanza) | 8% rojo (falta)
-  return `conic-gradient(
-    #fbc02d 0% 80%,
-    #8a5a00 80% 92%,
-    #c1272d 92% 100%
-  )`
-})
-
-// Valida todos los campos. Devuelve true si todo está OK; en caso contrario
-// rellena `errores` y `mensajeError` para mostrarlos al usuario.
 const validar = () => {
   const nuevosErrores = {}
 
@@ -338,87 +314,160 @@ const validar = () => {
     nuevosErrores.dni = 'El DNI debe tener exactamente 8 dígitos numéricos.'
   }
 
-  if (!anioLectivo.value) {
-    nuevosErrores.anio = 'Seleccione un año lectivo.'
+  if (!periodoSeleccionado.value) {
+    nuevosErrores.periodo = 'Seleccione un periodo.'
   }
 
-  if (!fechaDesde.value) {
-    nuevosErrores.desde = 'Seleccione la fecha "Desde".'
-  }
-
-  if (!fechaHasta.value) {
-    nuevosErrores.hasta = 'Seleccione la fecha "Hasta".'
-  }
-
-  // Validación cruzada: "Hasta" no puede ser anterior a "Desde"
   if (fechaDesde.value && fechaHasta.value && fechaHasta.value < fechaDesde.value) {
     nuevosErrores.hasta = 'La fecha "Hasta" no puede ser anterior a "Desde".'
   }
 
   errores.value = nuevosErrores
   mensajeError.value = Object.keys(nuevosErrores).length > 0
-    ? 'Por favor complete todos los datos solicitados antes de generar el reporte.'
+    ? 'Por favor revise los datos ingresados antes de generar el reporte.'
     : ''
 
   return Object.keys(nuevosErrores).length === 0
 }
 
-const generarReporte = () => {
-  // Si la validación falla, NO se genera el reporte
+const limpiarError = (campo) => {
+  if (!errores.value[campo]) return
+  const copia = { ...errores.value }
+  delete copia[campo]
+  errores.value = copia
+  if (!Object.keys(copia).length) mensajeError.value = ''
+}
+
+// ── Datos de la API ───────────────────────────────────────────────────────
+const studentData    = ref(null)
+const enrollmentData = ref(null)
+const allAssistances = ref([])
+
+// ── Estado UI ─────────────────────────────────────────────────────────────
+const reporteGenerado = ref(false)
+const noEncontrado    = ref(false)
+const cargando        = ref(false)
+const paginaActual    = ref(1)
+const registrosPorPagina = 4
+
+// ── Mapeo status API → etiqueta visual ───────────────────────────────────
+const estadoLabel = (status) => {
+  if (status === 'present') return 'Asistencia'
+  if (status === 'late')    return 'Tardanza'
+  return 'Falta'
+}
+
+// ── Registros filtrados por periodo y rango de fechas (client-side) ───────
+const registrosFiltrados = computed(() => {
+  let records = allAssistances.value.map(a => ({
+    fecha:       a.date,
+    raw_date:    a.raw_date,
+    period_code: a.period_code,
+    estado:      estadoLabel(a.status),
+    hora:        a.time_entry ?? '—',
+    observacion: a.observation ?? '—',
+  }))
+
+  if (periodoSeleccionado.value) {
+    records = records.filter(r => r.period_code === periodoSeleccionado.value)
+  }
+  if (fechaDesde.value) records = records.filter(r => r.raw_date >= fechaDesde.value)
+  if (fechaHasta.value) records = records.filter(r => r.raw_date <= fechaHasta.value)
+
+  return records
+})
+
+// ── Stats calculadas del conjunto filtrado ────────────────────────────────
+const statsResumen = computed(() => {
+  const records = registrosFiltrados.value
+  const total   = records.length
+  if (!total) return { total: 0, present: 0, absent: 0, late: 0, rate: 0 }
+
+  const present = records.filter(r => r.estado === 'Asistencia').length
+  const absent  = records.filter(r => r.estado === 'Falta').length
+  const late    = records.filter(r => r.estado === 'Tardanza').length
+
+  return { total, present, absent, late, rate: Math.round((present / total) * 100) }
+})
+
+const pctPresente = computed(() =>
+  statsResumen.value.total ? Math.round((statsResumen.value.present / statsResumen.value.total) * 100) : 0
+)
+const pctTardanza = computed(() =>
+  statsResumen.value.total ? Math.round((statsResumen.value.late    / statsResumen.value.total) * 100) : 0
+)
+const pctFalta = computed(() =>
+  statsResumen.value.total ? Math.round((statsResumen.value.absent  / statsResumen.value.total) * 100) : 0
+)
+
+const porcentajeTotal = computed(() => statsResumen.value.rate)
+
+const donutBackground = computed(() => {
+  const p = pctPresente.value
+  const t = p + pctTardanza.value
+  return `conic-gradient(#fbc02d 0% ${p}%, #1e2a3e ${p}% ${t}%, #c1272d ${t}% 100%)`
+})
+
+const nombreEstudiante = computed(() => studentData.value?.fullname ?? '')
+
+const gradoSeccion = computed(() => {
+  if (!enrollmentData.value) return 'SIN MATRÍCULA'
+  const { grade, section } = enrollmentData.value
+  return `${grade ?? ''} ${section ?? ''}`.trim().toUpperCase() || 'MATRICULADO'
+})
+
+// ── Paginación ────────────────────────────────────────────────────────────
+const totalPaginas = computed(() =>
+  Math.ceil(registrosFiltrados.value.length / registrosPorPagina)
+)
+
+const registrosPaginados = computed(() => {
+  const inicio = (paginaActual.value - 1) * registrosPorPagina
+  return registrosFiltrados.value.slice(inicio, inicio + registrosPorPagina)
+})
+
+// ── Generar reporte ───────────────────────────────────────────────────────
+const generarReporte = async () => {
   if (!validar()) {
     reporteGenerado.value = false
-    // Llevar la vista al mensaje de error
     setTimeout(() => {
-      const errorBox = document.querySelector('.alerta-error')
-      if (errorBox) errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      document.querySelector('.alerta-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }, 30)
     return
   }
 
-  cargando.value = true
+  cargando.value     = true
   mensajeError.value = ''
+  reporteGenerado.value = false
+  noEncontrado.value    = false
 
-  // Pequeña pausa simulando llamada a API
-  setTimeout(() => {
-    alumnoSeleccionado.value = `E: ${busquedaAlumno.value} @ Juan Pérez (ejemplo)`
+  try {
+    const { data } = await api.get('/attendance/student', {
+      params: {
+        dni:    busquedaAlumno.value.trim(),
+        period: periodoSeleccionado.value,
+      },
+    })
 
-    // Filtrar por fechas
-    let filtrados = [...asistenciaMock]
-    if (fechaDesde.value) {
-      const desde = new Date(fechaDesde.value)
-      filtrados = filtrados.filter(reg => {
-        const fechaReg = new Date(reg.fecha.replace(/,/g, '').replace('Oct', 'October'))
-        return fechaReg >= desde
-      })
+    if (!data.student) {
+      noEncontrado.value = true
+      return
     }
-    if (fechaHasta.value) {
-      const hasta = new Date(fechaHasta.value)
-      filtrados = filtrados.filter(reg => {
-        const fechaReg = new Date(reg.fecha.replace(/,/g, '').replace('Oct', 'October'))
-        return fechaReg <= hasta
-      })
-    }
-    registrosFiltrados.value = filtrados
-    paginaActual.value = 1
+
+    studentData.value    = data.student
+    enrollmentData.value = data.enrollment
+    allAssistances.value = data.assistances ?? []
+    paginaActual.value   = 1
     reporteGenerado.value = true
-    cargando.value = false
-    // Scroll suave hacia los resultados
-    setTimeout(() => {
-      const resumen = document.querySelector('.resumen-section')
-      if (resumen) resumen.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 50)
-  }, 300)
-}
 
-// Limpia el error de un campo en cuanto el usuario empieza a corregirlo
-const limpiarError = (campo) => {
-  if (errores.value[campo]) {
-    const copia = { ...errores.value }
-    delete copia[campo]
-    errores.value = copia
-    if (Object.keys(errores.value).length === 0) {
-      mensajeError.value = ''
-    }
+    setTimeout(() => {
+      document.querySelector('.resumen-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
+
+  } catch {
+    mensajeError.value = 'Error al conectar con el servidor. Intente nuevamente.'
+  } finally {
+    cargando.value = false
   }
 }
 
