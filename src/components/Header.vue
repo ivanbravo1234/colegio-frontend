@@ -1,35 +1,71 @@
 <template>
   <!-- Backdrop mobile -->
   <Transition name="fade">
-    <div v-if="mobileMenuOpen" class="mobile-backdrop" @click="closeMobileMenu" />
+    <div
+      v-if="mobileMenuOpen"
+      class="fixed inset-0 bg-[rgba(10,49,68,0.45)] z-[999] backdrop-blur-[3px]"
+      @click="closeMobileMenu"
+    />
   </Transition>
 
-  <header class="main-header" :class="{ scrolled: isScrolled }">
-    <div class="header-container">
+  <header
+    class="sticky top-0 z-[1000] transition-all duration-300"
+    :class="isScrolled
+      ? 'bg-white/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.08)]'
+      : 'bg-white shadow-[0_1px_0_rgba(0,0,0,0.07)]'"
+  >
+    <div class="max-w-[1200px] mx-auto px-6 max-[480px]:px-4 py-3 flex items-center justify-between gap-4">
+
       <!-- Logo -->
-      <router-link to="/" class="logo" @click="closeMobileMenu">
-        <img src="../assets/Logo SR.png" alt="Logo I.E. Santa Rosa" class="logo-image" />
-        <div class="logo-text">
-          <span class="logo-name uppercase">I.E. Santa Rosa</span>
-          <span class="logo-sub">Institución Educativa</span>
+      <router-link
+        to="/"
+        class="flex items-center gap-3 no-underline flex-shrink-0 group/logo"
+        @click="closeMobileMenu"
+      >
+        <img
+          src="../assets/Logo SR.png"
+          alt="Logo I.E. Santa Rosa"
+          class="h-[38px] min-[480px]:h-12 w-auto object-contain block transition-transform duration-200 group-hover/logo:scale-105"
+        />
+        <div class="flex flex-col leading-[1.2]">
+          <span class="text-[1.05rem] min-[480px]:text-[1.15rem] font-bold text-[#0a3144] tracking-tight uppercase transition-colors duration-200 group-hover/logo:text-[#fbc02d]">
+            I.E. Santa Rosa
+          </span>
+          <span class="text-[0.6rem] min-[480px]:text-[0.65rem] font-medium text-[#7a8a95] tracking-[0.8px] uppercase">
+            Institución Educativa
+          </span>
         </div>
       </router-link>
 
-      <!-- Navegación -->
-      <nav class="navbar" :class="{ 'nav-open': mobileMenuOpen }" aria-label="Navegación principal">
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <router-link to="/" class="nav-link" @click="closeMobileMenu">INICIO</router-link>
+      <!-- Nav drawer (mobile) / horizontal menu (desktop) -->
+      <nav
+        class="flex flex-col justify-start fixed top-0 right-0 translate-x-full w-[78%] max-w-[320px] h-screen bg-white shadow-[-8px_0_40px_rgba(0,0,0,0.14)] transition-transform duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)] z-[1000] overflow-y-auto nav:flex-row nav:static nav:flex-1 nav:justify-end nav:translate-x-0 nav:w-auto nav:max-w-none nav:h-auto nav:bg-transparent nav:shadow-none nav:transition-none nav:z-auto nav:overflow-visible"
+        :class="{ '!translate-x-0': mobileMenuOpen }"
+        aria-label="Navegación principal"
+      >
+        <!-- Mobile panel header -->
+        <div class="flex items-center gap-3 px-6 pt-6 pb-5 border-b border-[#f0f2f4] nav:hidden">
+          <img src="../assets/Logo SR.png" alt="Logo" class="h-9 w-auto object-contain" />
+          <div class="flex flex-col leading-[1.2]">
+            <span class="text-sm font-bold text-[#0a3144] uppercase tracking-tight">I.E. Santa Rosa</span>
+            <span class="text-[0.58rem] font-medium text-[#7a8a95] uppercase tracking-[0.7px]">Institución Educativa</span>
+          </div>
+        </div>
+
+        <ul class="flex flex-col items-start w-full list-none m-0 px-4 py-3 gap-1 nav:flex-row nav:items-center nav:gap-1 nav:w-auto nav:p-0">
+
+          <li class="w-full nav:w-auto">
+            <router-link to="/" class="nav-link group" @click="closeMobileMenu">
+              INICIO
+              <span class="nav-underline group-hover:scale-x-100"></span>
+            </router-link>
           </li>
 
-          <!-- Dropdown Nuestro Colegio -->
-          <li
-            class="nav-item dropdown"
-            :class="{ 'dropdown-open': dropdownOpen }"
-            @mouseleave="scheduleClose"
-          >
+          <!-- NUESTRO COLEGIO con dropdown -->
+          <li class="relative w-full nav:w-auto" @mouseleave="scheduleClose">
             <button
-              class="nav-link dropdown-toggle"
+              class="relative flex items-center justify-between w-full px-3 py-3 text-[0.875rem] font-semibold tracking-[0.4px] text-[#1e2a3e] rounded-lg transition-all duration-200 bg-transparent border-0 cursor-pointer font-[inherit] hover:text-[#fbc02d] hover:bg-[#fff8e5] nav:inline-flex nav:justify-start nav:w-auto nav:px-[0.65rem] nav:py-[0.45rem] nav:text-[0.78rem] nav:tracking-[0.5px] nav:hover:bg-[#fef9e3] nav:gap-1.5 group/dd"
+              :class="dropdownOpen ? 'text-[#b7791f] bg-[#fff8e5]' : ''"
               @click="toggleDropdown"
               @mouseenter="openDropdown"
               aria-haspopup="true"
@@ -37,83 +73,135 @@
             >
               NUESTRO COLEGIO
               <svg
-                class="arrow"
-                :class="{ rotate: dropdownOpen }"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                class="w-[11px] h-[11px] flex-shrink-0 transition-transform duration-[250ms] opacity-70"
+                :class="{ 'rotate-180': dropdownOpen }"
+                viewBox="0 0 24 24" fill="none"
               >
-                <polyline
-                  points="6 9 12 15 18 9"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
+              <span
+                class="absolute left-[0.65rem] right-[0.65rem] bottom-[4px] h-[2px] bg-[#fbc02d] rounded-full origin-center transition-transform duration-[250ms] hidden nav:block"
+                :class="dropdownOpen ? 'scale-x-100' : 'scale-x-0 group-hover/dd:scale-x-100'"
+              ></span>
             </button>
 
             <Transition name="dropdown-anim">
-              <ul
+              <div
                 v-if="dropdownOpen"
-                class="dropdown-menu"
+                class="ml-3 static nav:absolute nav:top-[calc(100%+8px)] nav:left-0 nav:ml-0 nav:z-[102]"
                 @mouseenter="cancelClose"
                 @mouseleave="scheduleClose"
               >
-                <li>
-                  <router-link to="/mision-vision" class="dropdown-item" @click="closeAll">
-                    Misión y Visión
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/historia" class="dropdown-item" @click="closeAll">
-                    Historia
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/directivos" class="dropdown-item" @click="closeAll">
-                    Directivos
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/plana-docente" class="dropdown-item" @click="closeAll">
-                    Plana Docente
-                  </router-link>
-                </li>
-              </ul>
+                <!-- Mobile: lista simple sin fondo -->
+                <ul class="list-none m-0 py-1 border-l-2 border-l-[#fbc02d] pl-1 nav:hidden">
+                  <li v-for="(item, i) in dropdownItems" :key="i">
+                    <router-link
+                      :to="item.to"
+                      class="dropdown-link flex items-center gap-3 px-3 py-2.5 text-[0.84rem] font-medium no-underline rounded-lg transition-all duration-150"
+                      @click="closeAll"
+                    >
+                      <span class="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center flex-shrink-0 bg-[#f4f6f8] text-[#4a6177] transition-colors duration-150 dropdown-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" v-html="item.icon"></svg>
+                      </span>
+                      {{ item.label }}
+                    </router-link>
+                  </li>
+                </ul>
+
+                <!-- Desktop: panel con header y descripciones -->
+                <div class="hidden nav:block bg-white rounded-2xl min-w-[260px] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.06]">
+                  <!-- Header del panel -->
+                  <div class="px-4 pt-4 pb-3 border-b border-[#f0f2f5]">
+                    <p class="text-[0.6rem] font-bold tracking-[2.5px] text-[#9aabb7] uppercase m-0">Nuestro Colegio</p>
+                  </div>
+                  <!-- Items -->
+                  <ul class="list-none m-0 p-2">
+                    <li v-for="(item, i) in dropdownItems" :key="i">
+                      <router-link
+                        :to="item.to"
+                        class="dropdown-link group/item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-all duration-150"
+                        @click="closeAll"
+                      >
+                        <span class="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0 bg-[#f4f6f8] text-[#4a6177] transition-all duration-150 dropdown-icon">
+                          <svg viewBox="0 0 24 24" width="17" height="17" v-html="item.icon"></svg>
+                        </span>
+                        <div class="flex flex-col min-w-0">
+                          <span class="text-[0.84rem] font-semibold leading-none mb-[3px] text-[#1e2a3e] transition-colors duration-150 dropdown-label">{{ item.label }}</span>
+                          <span class="text-[0.7rem] text-[#9aabb7] leading-none">{{ item.desc }}</span>
+                        </div>
+                      </router-link>
+                    </li>
+                  </ul>
+                  <!-- Footer -->
+                  <div class="px-4 py-3 border-t border-[#f0f2f5] bg-[#fafbfc]">
+                    <router-link to="/" @click="closeAll" class="flex items-center gap-1.5 text-[0.72rem] font-semibold text-[#fbc02d] no-underline hover:text-[#d4a017] transition-colors duration-150">
+                      Ver todo sobre nosotros
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </router-link>
+                  </div>
+                </div>
+              </div>
             </Transition>
           </li>
 
-          <li class="nav-item">
-            <router-link to="/reporte-asistencia" class="nav-link" @click="closeMobileMenu">
+          <li class="w-full nav:w-auto">
+            <router-link to="/reporte-asistencia" class="nav-link group" @click="closeMobileMenu">
               REPORTE ASISTENCIA
+              <span class="nav-underline group-hover:scale-x-100"></span>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/noticias" class="nav-link" @click="closeMobileMenu">NOTICIAS</router-link>
+
+          <li class="w-full nav:w-auto">
+            <router-link to="/noticias" class="nav-link group" @click="closeMobileMenu">
+              NOTICIAS
+              <span class="nav-underline group-hover:scale-x-100"></span>
+            </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/contacto" class="nav-link" @click="closeMobileMenu">CONTACTO</router-link>
+
+          <li class="w-full mt-2 pt-3 border-t border-[#f0f2f4] nav:w-auto nav:mt-0 nav:pt-0 nav:border-t-0">
+            <router-link
+              to="/contacto"
+              class="contact-btn flex items-center justify-center gap-2 w-full px-5 py-3 text-[0.78rem] font-bold tracking-[0.5px] rounded-full bg-[#fbc02d] text-[#0a3144] no-underline hover:bg-[#f5b81b] nav:inline-flex nav:w-auto nav:ml-3 nav:px-5 nav:py-2 nav:animate-contact-pulse"
+              @click="closeMobileMenu"
+            >
+              <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,12 2,6"/>
+              </svg>
+              CONTACTO
+            </router-link>
           </li>
         </ul>
       </nav>
 
-      <!-- Botón hamburguesa -->
+      <!-- Hamburger -->
       <button
-        class="mobile-toggle"
-        :class="{ 'is-active': mobileMenuOpen }"
+        class="flex items-center justify-center w-9 h-9 -mr-1 rounded-lg hover:bg-[#f8f9fa] border-0 cursor-pointer z-[1100] flex-shrink-0 transition-colors duration-200 nav:hidden"
         @click="toggleMobileMenu"
         :aria-label="mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'"
         :aria-expanded="mobileMenuOpen"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="flex flex-col justify-between w-5 h-[14px]">
+          <span
+            class="w-full h-[2px] bg-[#0a3144] rounded-full transition-[transform,opacity] duration-300 origin-center block"
+            :class="mobileMenuOpen ? 'rotate-45 translate-x-[3px] translate-y-[8px]' : ''"
+          ></span>
+          <span
+            class="w-full h-[2px] bg-[#0a3144] rounded-full transition-[transform,opacity] duration-300 origin-center block"
+            :class="mobileMenuOpen ? 'opacity-0 scale-x-0' : ''"
+          ></span>
+          <span
+            class="w-full h-[2px] bg-[#0a3144] rounded-full transition-[transform,opacity] duration-300 origin-center block"
+            :class="mobileMenuOpen ? '-rotate-45 translate-x-[3px] -translate-y-[8px]' : ''"
+          ></span>
+        </div>
       </button>
     </div>
 
-    <!-- LÍNEA AMARILLA -->
-    <div class="yellow-line"></div>
+    <!-- Línea inferior amarilla -->
+    <div class="h-[3px] bg-gradient-to-r from-[#e6a800] via-[#fbc02d] to-[#e6a800]"></div>
   </header>
 </template>
 
@@ -127,429 +215,190 @@ const mobileMenuOpen = ref(false)
 const isScrolled = ref(false)
 let closeTimer = null
 
-const openDropdown = () => {
-  if (closeTimer) clearTimeout(closeTimer)
-  dropdownOpen.value = true
-}
+const dropdownItems = [
+  {
+    to: '/mision-vision',
+    label: 'Misión y Visión',
+    desc:  'Nuestro propósito y proyección',
+    icon:  `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="currentColor" opacity=".9"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>`,
+  },
+  {
+    to: '/historia',
+    label: 'Historia',
+    desc:  '35 años de trayectoria',
+    icon:  `<path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor"/>`,
+  },
+  {
+    to: '/directivos',
+    label: 'Directivos',
+    desc:  'Equipo de gestión institucional',
+    icon:  `<path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill="currentColor"/>`,
+  },
+  {
+    to: '/plana-docente',
+    label: 'Plana Docente',
+    desc:  'Nuestros maestros y educadores',
+    icon:  `<path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z" fill="currentColor"/>`,
+  },
+]
 
-const scheduleClose = () => {
-  closeTimer = setTimeout(() => {
-    dropdownOpen.value = false
-  }, 150)
-}
-
-const cancelClose = () => {
-  if (closeTimer) clearTimeout(closeTimer)
-}
-
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value
-}
-
-const closeMobileMenu = () => {
-  mobileMenuOpen.value = false
-}
-
-const closeAll = () => {
-  dropdownOpen.value = false
-  mobileMenuOpen.value = false
-}
+const openDropdown    = () => { if (closeTimer) clearTimeout(closeTimer); dropdownOpen.value = true }
+const scheduleClose   = () => { closeTimer = setTimeout(() => { dropdownOpen.value = false }, 150) }
+const cancelClose     = () => { if (closeTimer) clearTimeout(closeTimer) }
+const toggleDropdown  = () => { dropdownOpen.value = !dropdownOpen.value }
+const closeMobileMenu = () => { mobileMenuOpen.value = false }
+const closeAll        = () => { dropdownOpen.value = false; mobileMenuOpen.value = false }
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
   if (!mobileMenuOpen.value) dropdownOpen.value = false
 }
 
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 10
-}
+const handleScroll = () => { isScrolled.value = window.scrollY > 10 }
 
 watch(() => route.path, closeAll)
-
 onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <style scoped>
-/* ----- BASE HEADER ----- */
-.main-header {
-  background-color: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.07);
-  transition: box-shadow 0.3s ease;
-}
-
-.main-header.scrolled {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-}
-
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* ----- LOGO ----- */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.logo-image {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
-.logo-name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #0a3144;
-  letter-spacing: -0.2px;
-}
-
-.logo-sub {
-  font-size: 0.67rem;
-  font-weight: 500;
-  color: #7a8a95;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-/* ----- NAVBAR ----- */
-.navbar {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0.25rem;
-  align-items: center;
-}
-
-.nav-item {
-  position: relative;
-}
-
-/* ----- NAV LINKS ----- */
+/* ── Nav link base (mobile) ── */
 .nav-link {
   position: relative;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.55px;
-  color: #1e2a3e;
-  transition: color 0.2s ease;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 0.5rem 0.65rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.3rem;
-  border-radius: 6px;
-  white-space: nowrap;
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #1e2a3e;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: color 0.2s, background-color 0.2s;
 }
 
-/* Indicador amarillo inferior */
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0.65rem;
-  right: 0.65rem;
-  bottom: 3px;
-  height: 2px;
-  background-color: #fbc02d;
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.25s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.router-link-active::after,
-.nav-link.router-link-exact-active::after,
-.dropdown-open .dropdown-toggle::after {
-  transform: scaleX(1);
-}
-
-.nav-link:hover,
-.dropdown-open .dropdown-toggle {
+.nav-link:hover {
   color: #fbc02d;
+  background-color: #fff8e5;
 }
 
 .nav-link.router-link-active,
 .nav-link.router-link-exact-active {
-  color: #fbc02d;
+  color: #b7791f;
+  font-weight: 700;
+  background-color: #fff8e5;
+}
+
+/* ── Underline indicator (visible only on desktop) ── */
+.nav-underline {
+  display: none;
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 4px;
+  height: 2px;
+  background-color: #fbc02d;
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s;
+}
+
+/* ── Dropdown links ── */
+.dropdown-link {
+  color: #4a5568;
+}
+
+.dropdown-link:hover {
+  background-color: #f8f9fb;
+}
+
+.dropdown-link:hover .dropdown-icon {
+  background-color: #fff0cc;
+  color: #b7791f;
+}
+
+.dropdown-link:hover .dropdown-label {
+  color: #0a3144;
+}
+
+.dropdown-link.router-link-active,
+.dropdown-link.router-link-exact-active {
+  background-color: #fff8e5;
+}
+
+.dropdown-link.router-link-active .dropdown-icon,
+.dropdown-link.router-link-exact-active .dropdown-icon {
+  background-color: #fbc02d;
+  color: #0a3144;
+}
+
+.dropdown-link.router-link-active .dropdown-label,
+.dropdown-link.router-link-exact-active .dropdown-label {
+  color: #b7791f;
   font-weight: 700;
 }
 
-/* ----- FLECHA SVG ----- */
-.arrow {
-  width: 12px;
-  height: 12px;
-  transition: transform 0.25s ease;
-  flex-shrink: 0;
-}
-
-.arrow.rotate {
-  transform: rotate(180deg);
-}
-
-/* ----- DROPDOWN MENU ----- */
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  background: #ffffff;
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  min-width: 215px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-top: 3px solid #fbc02d;
-  z-index: 102;
-}
-
-.dropdown-item {
-  display: block;
-  padding: 0.6rem 1.25rem;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #2c3f4f;
-  transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.18s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #fffbf0;
-  color: #0a3144;
-  padding-left: 1.55rem;
-}
-
-.dropdown-item.router-link-active,
-.dropdown-item.router-link-exact-active {
-  background-color: #fef3c7;
-  color: #795900;
-  font-weight: 600;
-}
-
-/* ----- TRANSICIÓN DROPDOWN ----- */
-.dropdown-anim-enter-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.dropdown-anim-leave-active {
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-.dropdown-anim-enter-from,
-.dropdown-anim-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-/* ----- LÍNEA AMARILLA ----- */
-.yellow-line {
-  height: 4px;
-  background-color: #f5b81b;
-}
-
-/* ----- BACKDROP MOBILE ----- */
-.mobile-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 49, 68, 0.4);
-  z-index: 999;
-  backdrop-filter: blur(2px);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-/* ----- BOTÓN HAMBURGUESA ----- */
-.mobile-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1100;
-  flex-shrink: 0;
-}
-
-.mobile-toggle span {
-  width: 100%;
-  height: 2px;
-  background-color: #0a3144;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: center;
-  display: block;
-}
-
-/* Hamburguesa → X */
-.mobile-toggle.is-active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 6px);
-}
-.mobile-toggle.is-active span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-.mobile-toggle.is-active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -6px);
-}
-
-/* ----- RESPONSIVE ----- */
-@media (max-width: 800px) {
-  .mobile-toggle {
-    display: flex;
-  }
-
-  .navbar {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 320px;
-    height: 100vh;
-    background: #ffffff;
-    box-shadow: -6px 0 32px rgba(0, 0, 0, 0.12);
-    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 5rem 1.5rem 2rem;
-    justify-content: flex-start;
-    z-index: 1000;
-    overflow-y: auto;
-  }
-
-  .navbar.nav-open {
-    right: 0;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    width: 100%;
-  }
-
-  .nav-item {
-    width: 100%;
-    border-bottom: 1px solid #f0f2f4;
-  }
-
-  .nav-item:last-child {
-    border-bottom: none;
-  }
-
+/* ── Desktop overrides (800px = nav breakpoint) ── */
+@media (min-width: 800px) {
   .nav-link {
-    padding: 0.85rem 0.25rem;
-    font-size: 0.875rem;
-    letter-spacing: 0.6px;
-    width: 100%;
-    border-radius: 0;
-    color: #1e2a3e;
+    display: inline-flex;
+    width: auto;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
   }
 
-  .nav-link::after {
-    display: none;
+  .nav-link:hover {
+    background-color: #fef9e3;
   }
 
-  .nav-link:hover,
   .nav-link.router-link-active,
   .nav-link.router-link-exact-active {
-    color: #fbc02d;
-    background: none;
+    background-color: transparent;
+    color: #b7791f;
   }
 
-  .dropdown-toggle {
-    justify-content: space-between;
-    width: 100%;
+  .nav-underline {
+    display: block;
   }
 
-  /* Dropdown dentro del panel mobile */
-  .dropdown-menu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    background: transparent;
-    padding: 0 0 0.5rem 0;
-    border: none;
-    border-top: none;
-    border-left: 3px solid #fbc02d;
-    border-radius: 0;
-    margin-left: 0.5rem;
-    min-width: unset;
-    width: calc(100% - 0.5rem);
+  .nav-link.router-link-active .nav-underline,
+  .nav-link.router-link-exact-active .nav-underline {
+    transform: scaleX(1);
   }
 
-  .dropdown-item {
-    padding: 0.55rem 1rem;
-    font-size: 0.84rem;
-    color: #4a5568;
+  .dropdown-link:hover {
+    background-color: #f8f9fb;
   }
 
-  .dropdown-item:hover {
-    padding-left: 1.3rem;
-    background: transparent;
+  .contact-btn {
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  .contact-btn:hover {
+    animation-play-state: paused;
+    background-color: #0a3144;
     color: #fbc02d;
   }
 
-  /* Transición simplificada en mobile */
-  .dropdown-anim-enter-from,
-  .dropdown-anim-leave-to {
-    opacity: 0;
-    transform: none;
+  .contact-btn.router-link-active,
+  .contact-btn.router-link-exact-active {
+    background-color: #0a3144;
+    color: #fbc02d;
+    animation: none;
   }
 }
 
-@media (max-width: 480px) {
-  .header-container {
-    padding: 0.65rem 1rem;
-  }
+/* ── Vue transitions ── */
+.dropdown-anim-enter-active { transition: opacity 0.18s ease, transform 0.18s ease; }
+.dropdown-anim-leave-active { transition: opacity 0.12s ease, transform 0.12s ease; }
+.dropdown-anim-enter-from,
+.dropdown-anim-leave-to     { opacity: 0; transform: translateY(-6px); }
 
-  .logo-image {
-    height: 38px;
-  }
-
-  .logo-name {
-    font-size: 1.05rem;
-  }
-
-  .logo-sub {
-    font-size: 0.6rem;
-  }
-}
+.fade-enter-active,
+.fade-leave-active { transition: opacity 0.25s ease; }
+.fade-enter-from,
+.fade-leave-to     { opacity: 0; }
 </style>
