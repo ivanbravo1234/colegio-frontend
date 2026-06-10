@@ -9,26 +9,24 @@
   </Transition>
 
   <header
-    class="sticky top-0 z-[1000] transition-all duration-300"
-    :class="isScrolled
-      ? 'bg-white/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.08)]'
-      : 'bg-white shadow-[0_1px_0_rgba(0,0,0,0.07)]'"
+    class="sticky top-0 z-[1000] bg-white transition-shadow duration-300"
+    :class="isScrolled ? 'shadow-[0_2px_20px_rgba(0,0,0,0.08)]' : 'shadow-[0_1px_0_rgba(0,0,0,0.07)]'"
   >
     <div class="max-w-[1200px] mx-auto px-6 max-[480px]:px-4 py-3 flex items-center justify-between gap-4">
 
       <!-- Logo -->
       <router-link
         to="/"
-        class="flex items-center gap-3 no-underline flex-shrink-0 group/logo"
+        class="flex items-center gap-3 no-underline flex-shrink-0"
         @click="closeMobileMenu"
       >
         <img
-          src="../assets/Logo SR.png"
+          src="../assets/logo.png"
           alt="Logo I.E. Santa Rosa"
-          class="h-[38px] min-[480px]:h-12 w-auto object-contain block transition-transform duration-200 group-hover/logo:scale-105"
+          class="h-[38px] min-[480px]:h-12 w-auto object-contain block"
         />
         <div class="flex flex-col leading-[1.2]">
-          <span class="text-[1.05rem] min-[480px]:text-[1.15rem] font-bold text-[#0a3144] tracking-tight uppercase transition-colors duration-200 group-hover/logo:text-[#fbc02d]">
+          <span class="text-[1.05rem] min-[480px]:text-[1.15rem] font-bold text-[#0a3144] tracking-tight uppercase">
             I.E. Santa Rosa
           </span>
           <span class="text-[0.6rem] min-[480px]:text-[0.65rem] font-medium text-[#7a8a95] tracking-[0.8px] uppercase">
@@ -45,7 +43,7 @@
       >
         <!-- Mobile panel header -->
         <div class="flex items-center gap-3 px-6 pt-6 pb-5 border-b border-[#f0f2f4] nav:hidden">
-          <img src="../assets/Logo SR.png" alt="Logo" class="h-9 w-auto object-contain" />
+          <img src="../assets/logo.png" alt="Logo" class="h-9 w-auto object-contain" />
           <div class="flex flex-col leading-[1.2]">
             <span class="text-sm font-bold text-[#0a3144] uppercase tracking-tight">I.E. Santa Rosa</span>
             <span class="text-[0.58rem] font-medium text-[#7a8a95] uppercase tracking-[0.7px]">Institución Educativa</span>
@@ -154,7 +152,7 @@
           </li>
 
           <li class="w-full nav:w-auto">
-            <router-link to="/noticias" class="nav-link group" @click="closeMobileMenu">
+            <router-link to="/news" class="nav-link group" @click="closeMobileMenu">
               NOTICIAS
               <span class="nav-underline group-hover:scale-x-100"></span>
             </router-link>
@@ -163,7 +161,7 @@
           <li class="w-full mt-2 pt-3 border-t border-[#f0f2f4] nav:w-auto nav:mt-0 nav:pt-0 nav:border-t-0">
             <router-link
               to="/contacto"
-              class="contact-btn flex items-center justify-center gap-2 w-full px-5 py-3 text-[0.78rem] font-bold tracking-[0.5px] rounded-full bg-[#fbc02d] text-[#0a3144] no-underline hover:bg-[#f5b81b] nav:inline-flex nav:w-auto nav:ml-3 nav:px-5 nav:py-2 nav:animate-contact-pulse"
+              class="contact-btn flex items-center justify-center gap-2 w-full px-5 py-3 text-[0.78rem] font-bold tracking-[0.5px] rounded-lg bg-[#fbc02d] text-[#0a3144] no-underline hover:bg-[#f5b81b] nav:inline-flex nav:w-auto nav:ml-3 nav:px-5 nav:py-2 nav:animate-contact-pulse"
               @click="closeMobileMenu"
             >
               <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -200,8 +198,6 @@
       </button>
     </div>
 
-    <!-- Línea inferior amarilla -->
-    <div class="h-[3px] bg-gradient-to-r from-[#e6a800] via-[#fbc02d] to-[#e6a800]"></div>
   </header>
 </template>
 
@@ -217,6 +213,12 @@ let closeTimer = null
 
 const dropdownItems = [
   {
+    to: '/about',
+    label: 'Quiénes Somos',
+    desc:  'Identidad y presentación institucional',
+    icon:  `<path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" fill="currentColor"/>`,
+  },
+  {
     to: '/mision-vision',
     label: 'Misión y Visión',
     desc:  'Nuestro propósito y proyección',
@@ -225,7 +227,7 @@ const dropdownItems = [
   {
     to: '/historia',
     label: 'Historia',
-    desc:  '35 años de trayectoria',
+    desc:  '67 años de trayectoria',
     icon:  `<path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor"/>`,
   },
   {

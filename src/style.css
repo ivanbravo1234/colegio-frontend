@@ -1,18 +1,39 @@
+@import "./assets/css/font.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-  margin:0;
-  padding:0;
+body {
+  margin: 0;
+  padding: 0;
   font-family: 'Mona Sans', ui-sans-serif, system-ui, sans-serif;
-  background:#fcf9f8;
+  background: #fcf9f8;
 }
 
-h1,h2,h3,h4{
+h1, h2, h3, h4 {
   font-family: 'Mona Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
+
+/* ── Shake animation ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+.animate-shake { animation: shake 0.4s ease-in-out; }
+
+/* ── Scroll reveal ── */
+.reveal-base {
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-from-up    { opacity: 0; transform: translateY(28px); }
+.reveal-from-down  { opacity: 0; transform: translateY(-28px); }
+.reveal-from-left  { opacity: 0; transform: translateX(-28px); }
+.reveal-from-right { opacity: 0; transform: translateX(28px); }
+.reveal-visible    { opacity: 1 !important; transform: none !important; }

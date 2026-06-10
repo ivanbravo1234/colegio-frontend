@@ -1,164 +1,281 @@
 <template>
-  <div class="contacto-page">
-    <div class="container">
-      <!-- Encabezado -->
-      <div class="header-section">
-        <span class="page-eyebrow">COMUNICACIÓN</span>
-        <h1 class="page-title">
-          Estamos para
-          <span class="highlight">escucharte.</span>
-        </h1>
-      </div>
+  <div class="bg-white text-[#1e2a3e] pb-24 max-md:pb-16">
 
-      <!-- Grid: Información de contacto + Formulario -->
-      <div class="contacto-grid">
-        <!-- Columna izquierda -->
-        <div class="info-contacto">
-          <!-- Ubicación Principal -->
-          <div class="info-card">
-            <div class="info-card-head">
-              <div class="icon-circle icon-circle--yellow">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="#1e2a3e" aria-hidden="true">
+    <PageHero
+      badge="COMUNICACIÓN"
+      title="Contacto"
+      description="Estamos para escucharte. Escríbenos, llámanos o visítanos — respondemos a cada consulta con atención y compromiso."
+      :breadcrumb="[{ label: 'Contacto' }]"
+    />
+
+    <div class="max-w-[1200px] mx-auto px-6 max-[480px]:px-4 pt-10">
+
+      <!-- ── Grid principal ── -->
+      <div class="grid grid-cols-[1fr_1.25fr] max-[860px]:grid-cols-1 gap-6 mb-14 max-md:mb-10">
+
+        <!-- Columna izquierda: información -->
+        <div class="flex flex-col gap-4">
+
+          <!-- Ubicación -->
+          <div v-reveal class="bg-[#f8fafc] border border-[#eef2f6] rounded-xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#fbc02d] hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-[10px] bg-[#fbc02d] flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="#1e2a3e" aria-hidden="true">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
                 </svg>
               </div>
-              <h3>Ubicación Principal</h3>
+              <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0">Ubicación Principal</h3>
             </div>
-            <p class="info-text">Jr. Progreso 114,<br />Tarapoto, Perú</p>
+            <p class="text-[#4a6177] text-[0.9rem] leading-[1.6] m-0 mb-3">Jr. Progreso 114, Tarapoto — San Martín, Perú</p>
+            <a
+              href="https://maps.google.com/?q=Colegio+Santa+Rosa+Tarapoto"
+              target="_blank" rel="noopener"
+              class="inline-flex items-center gap-1.5 text-[#b7791f] no-underline text-[0.76rem] font-semibold tracking-[0.5px] hover:gap-2.5 hover:text-[#0a3144] transition-all duration-200"
+            >
+              Ver en Google Maps <span>→</span>
+            </a>
           </div>
 
-          <!-- Teléfonos + Horario (mismo card, dos columnas) -->
-          <div class="info-card info-card--split">
-            <div class="split-item">
-              <div class="info-card-head">
-                <div class="icon-circle icon-circle--yellow">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#1e2a3e" aria-hidden="true">
-                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
-                  </svg>
+          <!-- Teléfonos + Horario -->
+          <div v-reveal class="bg-[#f8fafc] border border-[#eef2f6] rounded-xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#fbc02d] hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+            <div class="grid grid-cols-2 max-[480px]:grid-cols-1 gap-5">
+
+              <!-- Teléfonos -->
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-[10px] bg-[#fbc02d] flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="#1e2a3e" aria-hidden="true">
+                      <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0">Teléfonos</h3>
                 </div>
-                <h3>Teléfonos</h3>
+                <p class="text-[#4a6177] text-[0.88rem] m-0 mb-1">Central: (042) 456-7890</p>
+                <p class="text-[#4a6177] text-[0.88rem] m-0">Admisión: (042) 456-7891</p>
               </div>
-              <p class="info-text">Central: (01) 456-7890</p>
-              <p class="info-text">Admisión: (01) 456-7891</p>
-            </div>
-            <div class="split-item">
-              <div class="info-card-head">
-                <div class="icon-circle icon-circle--yellow">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#1e2a3e" aria-hidden="true">
-                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                  </svg>
+
+              <!-- Horario -->
+              <div class="border-l border-[#eef2f6] pl-5 max-[480px]:border-l-0 max-[480px]:pl-0 max-[480px]:border-t max-[480px]:pt-4">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-[10px] bg-[#fbc02d] flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="#1e2a3e" aria-hidden="true">
+                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0">Horario</h3>
                 </div>
-                <h3>Horario</h3>
+                <p class="text-[#4a6177] text-[0.88rem] m-0 mb-1">Lun – Vie: 08:00 – 16:00</p>
+                <p class="text-[#4a6177] text-[0.88rem] m-0">Sábado: 09:00 – 12:00</p>
               </div>
-              <p class="info-text">Lun - Vie: 08:00 - 16:00</p>
-              <p class="info-text">Sáb: 09:00 - 12:00</p>
+
             </div>
           </div>
 
-          <!-- Síguenos en Redes -->
-          <div class="redes-card">
-            <h3>Síguenos en Redes</h3>
-            <div class="redes-icons">
+          <!-- Correo electrónico -->
+          <div v-reveal class="bg-[#f8fafc] border border-[#eef2f6] rounded-xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#fbc02d] hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-[10px] bg-[#fbc02d] flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="#1e2a3e" aria-hidden="true">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0">Correo electrónico</h3>
+            </div>
+            <a href="mailto:contacto@iesantarosa.edu.pe" class="text-[#b7791f] text-[0.9rem] font-semibold no-underline hover:underline block mb-1">contacto@iesantarosa.edu.pe</a>
+            <a href="mailto:direccion@iesantarosa.edu.pe" class="text-[#4a6177] text-[0.88rem] no-underline hover:text-[#b7791f] transition-colors duration-200 block">direccion@iesantarosa.edu.pe</a>
+          </div>
+
+          <!-- Redes sociales -->
+          <div v-reveal class="bg-[#0a3144] rounded-xl p-5">
+            <p class="text-[0.65rem] font-bold tracking-[2px] uppercase text-[#fbc02d] m-0 mb-1">Comunidad digital</p>
+            <h3 class="text-[1rem] font-semibold text-white m-0 mb-4">Síguenos en redes</h3>
+            <div class="flex gap-3 flex-wrap">
               <a
                 v-for="red in redes"
                 :key="red.nombre"
                 :href="red.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="red-icon"
+                target="_blank" rel="noopener noreferrer"
                 :aria-label="red.nombre"
+                class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center hover:bg-[#fbc02d] hover:text-[#0a3144] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span v-html="red.icono"></span>
               </a>
             </div>
           </div>
+
         </div>
 
-        <!-- Columna derecha: formulario de contacto -->
-        <div class="formulario-contacto">
-          <h3>Envíanos un <span class="text-yellow">Mensaje</span></h3>
-          <form @submit.prevent="enviarConsulta">
-            <div class="fila-doble">
-              <div class="campo">
-                <label>NOMBRE COMPLETO</label>
-                <input type="text" v-model="form.nombre" placeholder="Ej. Juan Pérez" required />
+        <!-- Columna derecha: formulario -->
+        <div v-reveal class="bg-[#f8fafc] border border-[#eef2f6] border-t-[3px] border-t-[#fbc02d] rounded-xl p-7 max-[480px]:p-5 self-start shadow-[0_4px_18px_rgba(0,0,0,0.05)]">
+
+          <p class="text-[0.65rem] font-bold tracking-[2px] uppercase text-[#fbc02d] m-0 mb-1">Formulario de contacto</p>
+          <h2 class="text-[1.4rem] font-semibold text-[#0a3144] m-0 mb-6">Envíanos un mensaje</h2>
+
+          <!-- Éxito -->
+          <div v-if="mensajeEnviado" class="flex items-start gap-3 bg-[#d1fae5] border border-[#6ee7b7] rounded-xl px-4 py-4 mb-5">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#065f46" class="flex-shrink-0 mt-px" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <div>
+              <p class="text-[#065f46] font-semibold text-[0.9rem] m-0 mb-0.5">¡Consulta enviada correctamente!</p>
+              <p class="text-[#047857] text-[0.82rem] m-0">Nos pondremos en contacto contigo a la brevedad.</p>
+            </div>
+          </div>
+
+          <form v-else @submit.prevent="enviarConsulta" novalidate class="flex flex-col gap-4">
+
+            <!-- Nombre + Email -->
+            <div class="grid grid-cols-2 max-[560px]:grid-cols-1 gap-4">
+              <div class="flex flex-col gap-[0.4rem]">
+                <label class="text-[0.7rem] font-semibold uppercase text-[#4a6177] tracking-[1px]">Nombre completo</label>
+                <input
+                  type="text" v-model="form.nombre" placeholder="Ej. Juan Pérez" required
+                  class="w-full py-[0.7rem] px-4 rounded-xl text-[0.9rem] bg-white border border-[#e2e8f0] text-[#1e2a3e] outline-none font-[inherit] placeholder:text-[#94a3b8] transition-all duration-200 focus:border-[#fbc02d] focus:shadow-[0_0_0_3px_rgba(251,192,45,0.2)]"
+                  :class="errores.nombre ? 'border-[#b91c1c] bg-[#fef2f2] focus:border-[#b91c1c] focus:shadow-[0_0_0_3px_rgba(185,28,28,0.12)]' : ''"
+                />
+                <span v-if="errores.nombre" class="text-[0.73rem] text-[#b91c1c] font-semibold">{{ errores.nombre }}</span>
               </div>
-              <div class="campo">
-                <label>CORREO ELECTRÓNICO</label>
-                <input type="email" v-model="form.email" placeholder="juan@ejemplo.com" required />
+              <div class="flex flex-col gap-[0.4rem]">
+                <label class="text-[0.7rem] font-semibold uppercase text-[#4a6177] tracking-[1px]">Correo electrónico</label>
+                <input
+                  type="email" v-model="form.email" placeholder="juan@ejemplo.com" required
+                  class="w-full py-[0.7rem] px-4 rounded-xl text-[0.9rem] bg-white border border-[#e2e8f0] text-[#1e2a3e] outline-none font-[inherit] placeholder:text-[#94a3b8] transition-all duration-200 focus:border-[#fbc02d] focus:shadow-[0_0_0_3px_rgba(251,192,45,0.2)]"
+                  :class="errores.email ? 'border-[#b91c1c] bg-[#fef2f2] focus:border-[#b91c1c] focus:shadow-[0_0_0_3px_rgba(185,28,28,0.12)]' : ''"
+                />
+                <span v-if="errores.email" class="text-[0.73rem] text-[#b91c1c] font-semibold">{{ errores.email }}</span>
               </div>
             </div>
-            <div class="campo">
-              <label>ASUNTO DE CONSULTA</label>
-              <div class="select-wrap">
-                <select v-model="form.asunto" required>
-                  <option value="" disabled>Información de Admisión</option>
+
+            <!-- Asunto -->
+            <div class="flex flex-col gap-[0.4rem]">
+              <label class="text-[0.7rem] font-semibold uppercase text-[#4a6177] tracking-[1px]">Asunto de consulta</label>
+              <div class="relative">
+                <select
+                  v-model="form.asunto" required
+                  class="w-full py-[0.7rem] px-4 pr-10 rounded-xl text-[0.9rem] bg-white border border-[#e2e8f0] text-[#1e2a3e] outline-none font-[inherit] appearance-none cursor-pointer transition-all duration-200 focus:border-[#fbc02d] focus:shadow-[0_0_0_3px_rgba(251,192,45,0.2)]"
+                  :class="errores.asunto ? 'border-[#b91c1c] bg-[#fef2f2]' : ''"
+                >
+                  <option value="" disabled>Seleccione un asunto…</option>
                   <option value="Información de Admisión">Información de Admisión</option>
+                  <option value="Consulta académica">Consulta académica</option>
                   <option value="Sugerencias">Sugerencias</option>
                   <option value="Reclamos">Reclamos</option>
                   <option value="Otros">Otros</option>
                 </select>
-                <span class="select-arrow" aria-hidden="true">▾</span>
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#4a6177] text-[0.8rem]" aria-hidden="true">▾</span>
               </div>
+              <span v-if="errores.asunto" class="text-[0.73rem] text-[#b91c1c] font-semibold">{{ errores.asunto }}</span>
             </div>
-            <div class="campo">
-              <label>MENSAJE</label>
+
+            <!-- Mensaje -->
+            <div class="flex flex-col gap-[0.4rem]">
+              <label class="text-[0.7rem] font-semibold uppercase text-[#4a6177] tracking-[1px]">Mensaje</label>
               <textarea
-                v-model="form.mensaje"
-                rows="5"
-                placeholder="Escribe tu consulta detalladamente aquí..."
-                required
+                v-model="form.mensaje" rows="5" required
+                placeholder="Escribe tu consulta con el mayor detalle posible…"
+                class="w-full py-[0.7rem] px-4 rounded-xl text-[0.9rem] bg-white border border-[#e2e8f0] text-[#1e2a3e] outline-none font-[inherit] placeholder:text-[#94a3b8] resize-y min-h-[110px] transition-all duration-200 focus:border-[#fbc02d] focus:shadow-[0_0_0_3px_rgba(251,192,45,0.2)]"
+                :class="errores.mensaje ? 'border-[#b91c1c] bg-[#fef2f2]' : ''"
               ></textarea>
+              <span v-if="errores.mensaje" class="text-[0.73rem] text-[#b91c1c] font-semibold">{{ errores.mensaje }}</span>
             </div>
-            <button type="submit" class="btn-enviar">ENVIAR CONSULTA</button>
+
+            <button
+              type="submit"
+              class="w-full py-[0.85rem] text-[0.88rem] font-semibold rounded-lg bg-[#fbc02d] text-[#0a3144] border-0 cursor-pointer font-[inherit] hover:bg-[#f5b81b] hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(251,192,45,0.35)] transition-all duration-200 mt-1"
+            >
+              Enviar consulta
+            </button>
+
           </form>
-          <p v-if="mensajeEnviado" class="mensaje-exito">✅ ¡Consulta enviada! Nos pondremos en contacto pronto.</p>
         </div>
+
       </div>
 
-      <!-- Sección Nuestra Sede -->
-      <section class="sede-section">
-        <div class="sede-head">
+      <!-- ── Nuestra Sede ── -->
+      <section v-reveal>
+        <div class="flex items-end justify-between mb-6 flex-wrap gap-4">
           <div>
-            <h2 class="sede-title">Nuestra <span class="text-yellow">Sede</span></h2>
-            <p class="sede-sub">Visítanos y conoce nuestras instalaciones modernas y seguras.</p>
+            <p class="text-[0.65rem] font-bold tracking-[2px] uppercase text-[#fbc02d] m-0 mb-1">Encuéntranos</p>
+            <h2 class="text-[1.8rem] max-md:text-[1.5rem] font-semibold text-[#0a3144] m-0 mb-1">Nuestra Sede</h2>
+            <p class="text-[#4a6177] text-[0.92rem] m-0">Visítanos y conoce nuestras instalaciones modernas y seguras.</p>
           </div>
-          <div class="vigilancia-badge">
-            <div class="vigilancia-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#1e2a3e">
+          <span class="inline-flex items-center gap-2 bg-[#fef3c7] border border-[#fbc02d] px-4 py-[0.5rem] rounded-full text-[0.75rem] font-bold tracking-[0.8px] text-[#1e2a3e] flex-shrink-0">
+            <span class="w-6 h-6 bg-[#fbc02d] rounded-full flex items-center justify-center">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="#1e2a3e" aria-hidden="true">
                 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
               </svg>
-            </div>
-            <span>VIGILANCIA 24/7</span>
-          </div>
+            </span>
+            Vigilancia 24/7
+          </span>
         </div>
 
-        <div class="mapa-sede">
+        <div class="relative w-full rounded-2xl overflow-hidden bg-[#eef2f6] shadow-[0_4px_20px_rgba(0,0,0,0.08)]" style="aspect-ratio: 16/6; min-height: 280px">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.2438786355815!2d-76.3663192258493!3d-6.49077279350126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ba0bf6287606f7%3A0x8002d53a59daff54!2sColegio%20Santa%20Rosa!5e0!3m2!1ses!2spe!4v1780958980180!5m2!1ses!2spe"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            class="absolute inset-0 w-full h-full border-0 block"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
             title="Ubicación I.E. Santa Rosa"
           ></iframe>
         </div>
       </section>
+
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import PageHero from '../components/PageHero.vue'
+import { useSeo } from '../composables/useSeo'
 
-const form = ref({
-  nombre: '',
-  email: '',
-  asunto: '',
-  mensaje: ''
+useSeo({
+  title: 'Contacto',
+  description: 'Contáctate con la I.E. Santa Rosa — Jr. Progreso 114, Tarapoto. Teléfono: (042) 456-7890. Escríbenos o visítanos, estamos para atenderte.',
+  path: '/contacto',
 })
 
+const form = ref({ nombre: '', email: '', asunto: '', mensaje: '' })
+const errores = ref({})
 const mensajeEnviado = ref(false)
+
+const validar = () => {
+  const e = {}
+  if (!form.value.nombre.trim())  e.nombre  = 'Ingresa tu nombre completo.'
+  if (!form.value.email.trim())   e.email   = 'Ingresa tu correo electrónico.'
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) e.email = 'El correo no es válido.'
+  if (!form.value.asunto)         e.asunto  = 'Selecciona un asunto.'
+  if (!form.value.mensaje.trim()) e.mensaje = 'Escribe tu mensaje.'
+  errores.value = e
+  return Object.keys(e).length === 0
+}
+
+const enviarConsulta = () => {
+  if (!validar()) return
+
+  const fecha = new Date().toLocaleDateString('es-PE', { day: '2-digit', month: 'long', year: 'numeric' })
+  const texto = [
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    '📋 *CONSULTA - I.E. SANTA ROSA*',
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    '',
+    `📅 *Fecha:* ${fecha}`,
+    `👤 *Nombre:* ${form.value.nombre}`,
+    `📧 *Correo:* ${form.value.email}`,
+    `📌 *Asunto:* ${form.value.asunto}`,
+    '',
+    `💬 *Mensaje:*`,
+    form.value.mensaje,
+    '',
+    '━━━━━━━━━━━━━━━━━━━━━━',
+  ].join('\n')
+
+  window.open(`https://wa.me/51953128645?text=${encodeURIComponent(texto)}`, '_blank')
+
+  mensajeEnviado.value = true
+  form.value = { nombre: '', email: '', asunto: '', mensaje: '' }
+  errores.value = {}
+  setTimeout(() => { mensajeEnviado.value = false }, 6000)
+}
 
 const redes = [
   {
@@ -182,466 +299,4 @@ const redes = [
     icono: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38a3.72 3.72 0 0 1-1.38.9c-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.85 5.85 0 0 0-2.13 1.39A5.85 5.85 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.73 1.46 1.39 2.13a5.85 5.85 0 0 0 2.13 1.39c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.85 5.85 0 0 0 2.13-1.39 5.85 5.85 0 0 0 1.39-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.85 5.85 0 0 0-1.39-2.13A5.85 5.85 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>'
   }
 ]
-
-const enviarConsulta = () => {
-  console.log('Datos enviados:', form.value)
-  mensajeEnviado.value = true
-  form.value = {
-    nombre: '',
-    email: '',
-    asunto: '',
-    mensaje: ''
-  }
-  setTimeout(() => {
-    mensajeEnviado.value = false
-  }, 5000)
-}
 </script>
-
-<style scoped>
-.contacto-page {
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  background-color: #ffffff;
-  padding: 2.5rem 0 4rem;
-  color: #1e2a3e;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-/* ============== ENCABEZADO ============== */
-.header-section {
-  margin-bottom: 2.5rem;
-}
-
-.page-eyebrow {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  color: #4a6177;
-  margin-bottom: 0.5rem;
-}
-
-.page-title {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 3rem;
-  font-weight: 900;
-  line-height: 1.05;
-  color: #1e2a3e;
-  margin: 0;
-  letter-spacing: -1px;
-}
-
-.page-title .highlight {
-  display: inline-block;
-  background-color: #fbc02d;
-  color: #1e2a3e;
-  padding: 0.05em 0.35em 0.1em;
-  border-radius: 4px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-/* ============== GRID ============== */
-.contacto-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.info-contacto {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* ============== TARJETAS DE INFORMACIÓN ============== */
-.info-card {
-  background: #f9fafc;
-  border-radius: 16px;
-  padding: 1.4rem 1.5rem;
-  border: 1px solid #eef2f6;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.info-card:hover {
-  transform: translateY(-2px);
-  border-color: #f6c101;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-}
-
-.info-card-head {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-bottom: 0.6rem;
-}
-
-.info-card h3 {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #1e2a3e;
-  margin: 0;
-}
-
-.icon-circle {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.icon-circle--yellow {
-  background-color: #fbc02d;
-}
-
-.info-text {
-  color: #4a6177;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin: 0 0 0.15rem;
-}
-
-.map-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
-  color: #b7791f;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.78rem;
-  letter-spacing: 1px;
-  transition: gap 0.2s, color 0.2s;
-}
-
-.map-link:hover {
-  color: #8a5a00;
-  gap: 0.7rem;
-}
-
-.map-link .arrow {
-  font-size: 0.95rem;
-  transition: transform 0.2s;
-}
-
-.map-link:hover .arrow {
-  transform: translateX(2px);
-}
-
-/* Tarjeta doble: teléfonos + horario */
-.info-card--split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.split-item .info-card-head {
-  margin-bottom: 0.5rem;
-}
-
-.split-item + .split-item {
-  border-left: 1px solid #eef2f6;
-  padding-left: 1.5rem;
-}
-
-/* ============== TARJETA REDES ============== */
-.redes-card {
-  background-color: #fbc02d;
-  border-radius: 16px;
-  padding: 1.4rem 1.5rem;
-  color: #1e2a3e;
-}
-
-.redes-card h3 {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  margin: 0 0 0.9rem;
-  color: #1e2a3e;
-}
-
-.redes-icons {
-  display: flex;
-  gap: 0.7rem;
-  flex-wrap: wrap;
-}
-
-.red-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background-color: #1e2a3e;
-  color: #fbc02d;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.red-icon:hover {
-  transform: translateY(-2px);
-  background-color: #0a3144;
-}
-
-/* ============== FORMULARIO ============== */
-.formulario-contacto {
-  background: #f9fafc;
-  border-radius: 16px;
-  padding: 1.8rem 1.8rem 2rem;
-  border: 1px solid #eef2f6;
-  border-top: 4px solid #fbc02d;
-  align-self: start;
-}
-
-.formulario-contacto h3 {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #1e2a3e;
-  margin: 0 0 1.4rem;
-  letter-spacing: -0.5px;
-}
-
-.text-yellow {
-  color: #b7791f;
-}
-
-.fila-doble {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.campo {
-  margin-bottom: 1rem;
-}
-
-.campo label {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #4a6177;
-  margin-bottom: 0.35rem;
-  letter-spacing: 0.8px;
-}
-
-.campo input,
-.campo select,
-.campo textarea {
-  width: 100%;
-  padding: 0.7rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  background-color: #f1f5f9;
-  color: #1e2a3e;
-  font-family: inherit;
-  transition: all 0.2s;
-  box-sizing: border-box;
-}
-
-.campo input::placeholder,
-.campo textarea::placeholder {
-  color: #94a3b8;
-}
-
-.campo input:focus,
-.campo select:focus,
-.campo textarea:focus {
-  border-color: #fbc02d;
-  background-color: #fff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(251, 192, 45, 0.2);
-}
-
-.campo textarea {
-  resize: vertical;
-  min-height: 110px;
-}
-
-.select-wrap {
-  position: relative;
-}
-
-.select-wrap select {
-  appearance: none;
-  -webkit-appearance: none;
-  padding-right: 2.2rem;
-  cursor: pointer;
-}
-
-.select-arrow {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #4a6177;
-  font-size: 0.85rem;
-}
-
-.btn-enviar {
-  background-color: #fbc02d;
-  border: none;
-  padding: 0.9rem 1.5rem;
-  border-radius: 40px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: #1e2a3e;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
-}
-
-.btn-enviar:hover {
-  background-color: #f5b81b;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(245, 184, 27, 0.3);
-}
-
-.mensaje-exito {
-  margin-top: 1rem;
-  padding: 0.8rem;
-  background: #d1fae5;
-  color: #065f46;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-/* ============== SECCIÓN NUESTRA SEDE ============== */
-.sede-section {
-  margin-top: 2rem;
-}
-
-.sede-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.sede-title {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #1e2a3e;
-  margin: 0 0 0.3rem;
-  letter-spacing: -0.5px;
-}
-
-.sede-sub {
-  color: #4a6177;
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-.vigilancia-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background-color: #fef3c7;
-  border: 1px solid #f6c101;
-  padding: 0.55rem 1rem;
-  border-radius: 40px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: #1e2a3e;
-}
-
-.vigilancia-icon {
-  width: 26px;
-  height: 26px;
-  background-color: #fbc02d;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mapa-sede {
-  position: relative;
-  width: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #eef2f6;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  /* Mantiene la proporción 4:3 del iframe de Google Maps */
-  aspect-ratio: 4 / 3;
-}
-
-.mapa-sede iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
-/* ============== RESPONSIVE ============== */
-@media (max-width: 900px) {
-  .contacto-grid {
-    grid-template-columns: 1fr;
-  }
-  .page-title {
-    font-size: 2.4rem;
-  }
-  .sede-title {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .info-card--split {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .split-item + .split-item {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid #eef2f6;
-    padding-top: 1rem;
-  }
-  .fila-doble {
-    grid-template-columns: 1fr;
-  }
-  .page-title {
-    font-size: 1.9rem;
-  }
-  .mapa-sede {
-    aspect-ratio: 3 / 2;
-  }
-  .sede-head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 1rem;
-  }
-  .formulario-contacto {
-    padding: 1.4rem;
-  }
-}
-</style>

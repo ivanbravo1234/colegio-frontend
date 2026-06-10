@@ -1,208 +1,81 @@
 <template>
-  <div class="mision-vision-page">
-    <!-- Hero con título -->
-    <section class="hero">
-      <div class="container">
-        <h1 class="hero-title">Misión &amp; Visión</h1>
-        <p class="hero-subtitle">Nuestra identidad y compromiso con la excelencia educativa.</p>
-      </div>
-      <span class="hero-watermark" aria-hidden="true">SR</span>
-    </section>
+  <div class="bg-white text-[#1e2a3e] pb-24 max-md:pb-16">
 
-    <!-- Tarjetas de Misión y Visión -->
-    <section class="container cards-section">
-      <div class="cards-grid">
-        <!-- Tarjeta Misión -->
-        <article class="mv-card">
-          <div class="mv-card-head">
-            <div class="mv-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="#1e2a3e">
+    <PageHero
+      badge="NUESTRO PROPÓSITO"
+      title="Misión y Visión"
+      description="Nuestra identidad y el compromiso que nos guía hacia la excelencia educativa de la región San Martín."
+      :breadcrumb="[{ label: 'Nuestro Colegio' }, { label: 'Misión y Visión' }]"
+    />
+
+    <div class="max-w-[1200px] mx-auto px-6 pt-14 max-md:pt-10">
+
+      <div class="grid grid-cols-2 max-[800px]:grid-cols-1 gap-8 max-md:gap-5">
+
+        <!-- Misión -->
+        <article v-reveal class="relative bg-white rounded-xl border border-[#eef2f6] border-l-[5px] border-l-[#fbc02d] p-8 max-md:p-6 shadow-[0_4px_18px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-200">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-11 h-11 rounded-[10px] bg-[#fbc02d] flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#1e2a3e">
                 <path d="M12 2.5c-3 0-5.5 2.5-5.5 5.5 0 1.6.7 3 1.8 4l-1.8 8h11l-1.8-8c1.1-1 1.8-2.4 1.8-4 0-3-2.5-5.5-5.5-5.5zm-2.5 14l1.1-5h2.8l1.1 5h-5zM12 9.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/>
               </svg>
             </div>
-            <h2 class="mv-title">Misión Institucional</h2>
+            <h2 class="text-[1.5rem] font-semibold text-[#0a3144] m-0">Misión Institucional</h2>
           </div>
-          <p class="mv-text">
-            Lograr que todas y todos los estudiantes de la IE Santa Rosa Tarapoto culminen
-            la Educación Básica Regular en el nivel Secundaria, afiancen los aprendizajes
-            establecidos en el Currículo Nacional y alcancen su desarrollo integral en
-            espacios seguros, inclusivos y con una convivencia escolar democrática,
-            respetando la diversidad cultural de nuestra región San Martín.
+          <p class="text-[#2c3f4f] text-[0.95rem] leading-[1.75] m-0">
+            Lograr que todas y todos los estudiantes de la I.E. Santa Rosa culminen la Educación Básica Regular en el nivel Secundaria, afiancen los aprendizajes establecidos en el Currículo Nacional y alcancen su desarrollo integral en espacios seguros, inclusivos y con una convivencia escolar democrática, respetando la diversidad cultural de nuestra región San Martín.
           </p>
-          <div class="mv-underline" aria-hidden="true"></div>
+          <div class="w-12 h-[3px] bg-[#fbc02d] rounded-full mt-6"></div>
         </article>
 
-        <!-- Tarjeta Visión -->
-        <article class="mv-card">
-          <div class="mv-card-head">
-            <div class="mv-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="#1e2a3e">
+        <!-- Visión -->
+        <article v-reveal="100" class="relative bg-white rounded-xl border border-[#eef2f6] border-l-[5px] border-l-[#0a3144] p-8 max-md:p-6 shadow-[0_4px_18px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-200">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-11 h-11 rounded-[10px] bg-[#0a3144] flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#fbc02d">
                 <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
               </svg>
             </div>
-            <h2 class="mv-title">Visión</h2>
+            <h2 class="text-[1.5rem] font-semibold text-[#0a3144] m-0">Visión</h2>
           </div>
-          <p class="mv-text">
-            Al 2028, ser una institución líder en la región, reconocida por su excelencia
-            académica y formación en valores, donde nuestros egresados sean ciudadanos
-            capaces de enfrentar los desafíos del siglo XXI, con conciencia ambiental y
-            compromiso social, contribuyendo al desarrollo de su comunidad.
+          <p class="text-[#2c3f4f] text-[0.95rem] leading-[1.75] m-0">
+            Al 2028, ser una institución líder en la región, reconocida por su excelencia académica y formación en valores, donde nuestros egresados sean ciudadanos capaces de enfrentar los desafíos del siglo XXI, con conciencia ambiental y compromiso social, contribuyendo al desarrollo de su comunidad.
           </p>
-          <div class="mv-underline" aria-hidden="true"></div>
+          <div class="w-12 h-[3px] bg-[#0a3144] rounded-full mt-6"></div>
         </article>
+
       </div>
-    </section>
+
+      <!-- Valores como refuerzo -->
+      <div v-reveal class="mt-14 max-md:mt-10 bg-[#0a3144] rounded-xl p-8 max-md:p-6 flex flex-col max-[700px]:flex-row flex-wrap gap-0 max-[700px]:gap-6 md:flex-row md:divide-x md:divide-white/10">
+        <div
+          v-for="(valor, i) in valores"
+          :key="valor.label"
+          class="flex-1 px-8 max-md:px-5 max-[700px]:px-0 first:pl-0 last:pr-0 py-2"
+        >
+          <p class="text-[#fbc02d] text-[0.68rem] font-bold tracking-[2px] uppercase m-0 mb-1">0{{ i + 1 }}</p>
+          <h3 class="text-white text-[1.2rem] font-semibold m-0 mb-2">{{ valor.label }}</h3>
+          <p class="text-white/60 text-[0.85rem] leading-relaxed m-0">{{ valor.desc }}</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script setup>
-// Página estática de Misión & Visión
+import PageHero from '../components/PageHero.vue'
+import { useSeo } from '../composables/useSeo'
+
+useSeo({
+  title: 'Misión y Visión',
+  description: 'Misión y visión de la I.E. Santa Rosa: nuestros principios educativos y objetivos para el desarrollo integral de los estudiantes en Tarapoto, San Martín.',
+  path: '/mision-vision',
+})
+
+const valores = [
+  { label: 'Disciplina', desc: 'Orden, respeto y autocontrol como base de la convivencia.' },
+  { label: 'Trabajo',    desc: 'Esfuerzo y perseverancia como camino a la excelencia.' },
+  { label: 'Dignidad',   desc: 'Respeto propio y hacia los demás en toda circunstancia.' },
+]
 </script>
-
-<style scoped>
-.mision-vision-page {
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  background-color: #ffffff;
-  color: #1e2a3e;
-  padding-bottom: 4rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-/* ============== HERO ============== */
-.hero {
-  position: relative;
-  text-align: center;
-  padding: 4rem 1.5rem 3rem;
-  background: linear-gradient(180deg, #fef9e3 0%, #ffffff 100%);
-  overflow: hidden;
-}
-
-.hero-title {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 3.6rem;
-  font-weight: 900;
-  color: #1e2a3e;
-  margin: 0 0 0.8rem;
-  letter-spacing: -1px;
-  line-height: 1.05;
-}
-
-.hero-subtitle {
-  color: #4a6177;
-  font-size: 1.05rem;
-  margin: 0;
-}
-
-.hero-watermark {
-  position: absolute;
-  bottom: -1.2rem;
-  right: 4%;
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 11rem;
-  font-weight: 900;
-  color: rgba(251, 192, 45, 0.08);
-  letter-spacing: -8px;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* ============== TARJETAS ============== */
-.cards-section {
-  padding-top: 3rem;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.mv-card {
-  position: relative;
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #eef2f6;
-  border-left: 6px solid #fbc02d;
-  padding: 2rem 2rem 2.5rem;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.mv-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-}
-
-.mv-card-head {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
-}
-
-.mv-icon {
-  width: 44px;
-  height: 44px;
-  background-color: #fbc02d;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.mv-title {
-  font-family: 'Public Sans', 'Inter', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: #1e2a3e;
-  margin: 0;
-}
-
-.mv-text {
-  color: #2c3f4f;
-  font-size: 0.97rem;
-  line-height: 1.7;
-  margin: 0 0 1.2rem;
-  text-align: justify;
-}
-
-.mv-underline {
-  width: 50px;
-  height: 3px;
-  background-color: #fbc02d;
-  border-radius: 3px;
-}
-
-/* ============== RESPONSIVE ============== */
-@media (max-width: 900px) {
-  .hero-title {
-    font-size: 2.6rem;
-  }
-  .cards-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    padding: 2.5rem 1rem 2rem;
-  }
-  .hero-title {
-    font-size: 2rem;
-  }
-  .mv-card {
-    padding: 1.5rem;
-  }
-  .hero-watermark {
-    font-size: 7rem;
-  }
-}
-</style>

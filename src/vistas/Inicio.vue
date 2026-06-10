@@ -50,12 +50,12 @@
 
               <!-- Botones -->
               <div class="flex flex-wrap gap-3">
-                <button class="px-6 py-[0.78rem] text-[0.78rem] font-semibold tracking-[0.8px] rounded-lg bg-[#fbc02d] text-[#0a3144] hover:bg-[#ffd54f] transition-colors duration-300 cursor-pointer">
+                <router-link to="/about" class="px-6 py-[0.78rem] text-[0.78rem] font-semibold tracking-[0.8px] rounded-lg bg-[#fbc02d] text-[#0a3144] hover:bg-[#ffd54f] transition-colors duration-300 no-underline">
                   CONÓCENOS
-                </button>
-                <button class="px-6 py-[0.78rem] text-[0.78rem] font-semibold tracking-[0.8px] rounded-lg bg-white/10 text-white border border-white/30 hover:bg-white/20 hover:border-white/50 transition-colors duration-300 cursor-pointer">
+                </router-link>
+                <router-link to="/admision" class="px-6 py-[0.78rem] text-[0.78rem] font-semibold tracking-[0.8px] rounded-lg bg-white/10 text-white border border-white/30 hover:bg-white/20 hover:border-white/50 transition-colors duration-300 no-underline">
                   ADMISIÓN 2027
-                </button>
+                </router-link>
               </div>
             </div>
           </Transition>
@@ -77,54 +77,54 @@
 
     <!-- VALORES -->
     <section class="relative bg-white overflow-hidden">
-      <div class="max-w-[1200px] mx-auto px-6 py-16 relative">
+      <div class="max-w-[1200px] mx-auto px-6 py-24 max-md:py-16 relative">
 
-        <div class="mb-10 relative z-10">
-          <span class="inline-block bg-[#fbc02d] text-[#1e2a3e] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-4 rounded-sm">NUESTRA ESENCIA</span>
-          <h2 class="text-[2.4rem] max-md:text-[1.8rem] font-bold text-[#0a3144] m-0 mb-2 leading-[1.1]">Nuestros Valores</h2>
-          <p class="text-[#4a6177] m-0 text-[0.95rem] leading-relaxed max-w-[620px]">
-            La base de nuestra formación integral se sustenta en tres pilares fundamentales que guían a cada estudiante hacia la realización personal y profesional.
+        <div v-reveal class="mb-14 max-md:mb-10 relative z-10">
+          <span class="inline-block bg-[#fbc02d] text-[#1e2a3e] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-5 rounded-sm">NUESTRA ESENCIA</span>
+          <h2 class="text-[2.8rem] max-md:text-[2rem] max-[480px]:text-[1.7rem] font-bold text-[#0a3144] m-0 mb-3 leading-[1.1]">Nuestros Valores</h2>
+          <p class="text-[#4a6177] m-0 text-[1rem] leading-relaxed max-w-[560px]">
+            Tres pilares fundamentales que guían a cada estudiante hacia la realización personal y profesional.
           </p>
         </div>
 
-        <div class="grid grid-cols-3 max-[992px]:grid-cols-1 gap-6 relative z-10">
-          <!-- Trabajo -->
-          <div class="p-7 rounded-xl bg-[#fbc02d] text-[#1e2a3e]">
-            <div class="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center mb-5 bg-[#1e2a3e] text-[#fbc02d]">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L7 9.9V13h2V9.6l1.8-.7"/>
-              </svg>
-            </div>
-            <h3 class="text-[1.4rem] font-bold m-0 mb-3">Trabajo</h3>
-            <p class="m-0 text-[0.85rem] leading-[1.55] opacity-90">Fomentamos la cultura del esfuerzo y la perseverancia como el único camino hacia la excelencia y el cumplimiento de metas personales.</p>
-          </div>
-
+        <div class="grid grid-cols-3 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1 gap-8 max-md:gap-5 relative z-10">
           <!-- Disciplina -->
-          <div class="p-7 rounded-xl bg-[#0a3144] text-white">
-            <div class="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center mb-5 bg-[#fbc02d] text-[#0a3144]">
+          <div v-reveal class="p-8 max-md:p-6 rounded-xl bg-[#0a3144] text-white flex flex-col">
+            <div class="w-11 h-11 rounded-[10px] flex items-center justify-center mb-6 bg-[#fbc02d] text-[#0a3144] flex-shrink-0">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
               </svg>
             </div>
-            <h3 class="text-[1.4rem] font-bold m-0 mb-3">Disciplina</h3>
-            <p class="m-0 text-[0.85rem] leading-[1.55] opacity-90">Promovemos el orden, el respeto por las normas y el autocontrol como herramientas vitales para la convivencia armónica y el éxito académico.</p>
+            <h3 class="text-[1.5rem] font-semibold m-0 mb-3">Disciplina</h3>
+            <p class="m-0 text-[0.88rem] leading-[1.65] opacity-80">Promovemos el orden, el respeto por las normas y el autocontrol como herramientas vitales para la convivencia armónica y el éxito académico.</p>
+          </div>
+
+          <!-- Trabajo -->
+          <div v-reveal="100" class="p-8 max-md:p-6 rounded-xl bg-[#fbc02d] text-[#1e2a3e] flex flex-col">
+            <div class="w-11 h-11 rounded-[10px] flex items-center justify-center mb-6 bg-[#1e2a3e] text-[#fbc02d] flex-shrink-0">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L7 9.9V13h2V9.6l1.8-.7"/>
+              </svg>
+            </div>
+            <h3 class="text-[1.5rem] font-semibold m-0 mb-3">Trabajo</h3>
+            <p class="m-0 text-[0.88rem] leading-[1.65] opacity-80">Fomentamos la cultura del esfuerzo y la perseverancia como el único camino hacia la excelencia y el cumplimiento de metas personales.</p>
           </div>
 
           <!-- Dignidad -->
-          <div class="p-7 rounded-xl bg-white text-[#1e2a3e] border border-[#eef2f6] shadow-[0_4px_14px_rgba(0,0,0,0.04)]">
-            <div class="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center mb-5 bg-[#0a3144] text-[#fbc02d]">
+          <div v-reveal="200" class="p-8 max-md:p-6 rounded-xl bg-white text-[#1e2a3e] border border-[#eef2f6] shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col max-[900px]:col-span-2 max-[560px]:col-span-1">
+            <div class="w-11 h-11 rounded-[10px] flex items-center justify-center mb-6 bg-[#0a3144] text-[#fbc02d] flex-shrink-0">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
               </svg>
             </div>
-            <h3 class="text-[1.4rem] font-bold m-0 mb-3">Dignidad</h3>
-            <p class="m-0 text-[0.85rem] leading-[1.55] opacity-90">Cultivamos el respeto propio y hacia los demás, valorando la integridad humana como el tesoro más preciado de nuestra comunidad.</p>
+            <h3 class="text-[1.5rem] font-semibold m-0 mb-3">Dignidad</h3>
+            <p class="m-0 text-[0.88rem] leading-[1.65] opacity-80">Cultivamos el respeto propio y hacia los demás, valorando la integridad humana como el tesoro más preciado de nuestra comunidad.</p>
           </div>
         </div>
 
         <!-- Marca de agua -->
         <div
-          class="absolute top-[30%] right-[2%] text-[11rem] font-bold text-[rgba(251,192,45,0.10)] leading-none pointer-events-none select-none z-0 max-[992px]:hidden"
+          class="absolute top-[30%] right-[2%] text-[11rem] font-bold text-[rgba(251,192,45,0.10)] leading-none pointer-events-none select-none z-0 max-[900px]:hidden"
           style="letter-spacing: -8px"
           aria-hidden="true"
         >SR</div>
@@ -132,73 +132,96 @@
     </section>
 
     <!-- CONVENIOS -->
-    <section class="bg-white pb-16">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="text-center mb-8">
-          <span class="inline-block bg-[#0a3144] text-[#fbc02d] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-4 rounded-sm">ALIANZAS ESTRATÉGICAS</span>
-          <h2 class="text-[2.4rem] max-md:text-[1.8rem] font-bold text-[#0a3144] m-0 leading-[1.1] text-center">Convenios Institucionales</h2>
+    <section class="bg-[#f8fafc]">
+      <div class="max-w-[1200px] mx-auto px-6 py-24 max-md:py-16">
+
+        <div v-reveal class="text-center mb-14 max-md:mb-10">
+          <span class="inline-block bg-[#0a3144] text-[#fbc02d] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-5 rounded-sm">ALIANZAS ESTRATÉGICAS</span>
+          <h2 class="text-[2.4rem] max-md:text-[1.8rem] max-[480px]:text-[1.6rem] font-semibold text-[#0a3144] m-0 mb-3 leading-[1.1]">Convenios Institucionales</h2>
+          <p class="text-[#4a6177] m-0 text-[1rem] leading-relaxed max-w-[500px] mx-auto">
+            Alianzas con instituciones de referencia que enriquecen la formación de nuestros estudiantes.
+          </p>
         </div>
 
-        <div class="grid grid-cols-3 max-[992px]:grid-cols-1 gap-12 justify-items-center">
-          <div class="flex flex-col items-center gap-4 transition-transform duration-200 hover:-translate-y-[3px] group">
-            <div class="w-20 h-20 flex items-center justify-center rounded-lg bg-[#1e2a3e] text-[#f5b81b] shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-transform duration-200 group-hover:scale-105">
-              <span class="text-[2.4rem] font-bold leading-none">M</span>
+        <div class="grid grid-cols-3 max-[700px]:grid-cols-1 gap-6 max-md:gap-4">
+          <!-- Macmillan -->
+          <div v-reveal class="flex flex-col items-center text-center p-8 max-md:p-6 rounded-xl bg-white border border-[#eef2f6] shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-200 group">
+            <div class="w-16 h-16 flex items-center justify-center rounded-lg bg-[#1e2a3e] text-[#f5b81b] mb-5 shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-transform duration-200 group-hover:scale-105 flex-shrink-0">
+              <span class="text-[2rem] font-bold leading-none">M</span>
             </div>
-            <p class="text-[0.7rem] font-bold tracking-[1.5px] text-[#4a6177] text-center m-0">MACMILLAN EDUCATION</p>
+            <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0 mb-2">Macmillan Education</h3>
+            <p class="text-[0.82rem] text-[#4a6177] leading-relaxed m-0">Programa de inglés certificado con metodología internacional para todos los niveles.</p>
           </div>
-          <div class="flex flex-col items-center gap-4 transition-transform duration-200 hover:-translate-y-[3px] group">
-            <div class="w-20 h-20 flex items-center justify-center rounded-lg bg-white text-[#4285f4] border border-[#eef2f6] shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-transform duration-200 group-hover:scale-105">
-              <span class="text-[2.4rem] font-bold leading-none">G</span>
+
+          <!-- Google -->
+          <div v-reveal="100" class="flex flex-col items-center text-center p-8 max-md:p-6 rounded-xl bg-white border border-[#eef2f6] shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-200 group">
+            <div class="w-16 h-16 flex items-center justify-center rounded-lg bg-white text-[#4285f4] border border-[#e8eef8] mb-5 shadow-[0_4px_12px_rgba(66,133,244,0.12)] transition-transform duration-200 group-hover:scale-105 flex-shrink-0">
+              <span class="text-[2rem] font-bold leading-none">G</span>
             </div>
-            <p class="text-[0.7rem] font-bold tracking-[1.5px] text-[#4a6177] text-center m-0">GOOGLE WORKSPACE</p>
+            <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0 mb-2">Google Workspace</h3>
+            <p class="text-[0.82rem] text-[#4a6177] leading-relaxed m-0">Herramientas digitales para la educación que potencian la colaboración y la productividad.</p>
           </div>
-          <div class="flex flex-col items-center gap-4 transition-transform duration-200 hover:-translate-y-[3px] group">
-            <div class="w-20 h-20 flex items-center justify-center rounded-lg bg-[#f5b81b] text-[#1e2a3e] shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-transform duration-200 group-hover:scale-105">
-              <span class="text-[2.4rem] font-bold leading-none">B</span>
+
+          <!-- B-Nice -->
+          <div v-reveal="200" class="flex flex-col items-center text-center p-8 max-md:p-6 rounded-xl bg-white border border-[#eef2f6] shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform duration-200 group">
+            <div class="w-16 h-16 flex items-center justify-center rounded-lg bg-[#f5b81b] text-[#1e2a3e] mb-5 shadow-[0_4px_12px_rgba(245,184,27,0.2)] transition-transform duration-200 group-hover:scale-105 flex-shrink-0">
+              <span class="text-[2rem] font-bold leading-none">B</span>
             </div>
-            <p class="text-[0.7rem] font-bold tracking-[1.5px] text-[#4a6177] text-center m-0">B-NICE ACADEMY</p>
+            <h3 class="text-[1rem] font-semibold text-[#0a3144] m-0 mb-2">B-Nice Academy</h3>
+            <p class="text-[0.82rem] text-[#4a6177] leading-relaxed m-0">Formación en valores y habilidades blandas para el desarrollo integral del estudiante.</p>
           </div>
+        </div>
+
+        <div v-reveal class="flex justify-center mt-10">
+          <router-link to="/agreements" class="inline-flex items-center gap-2 px-6 py-[0.78rem] text-[0.82rem] font-semibold tracking-[0.5px] rounded-lg border border-[#d1dce6] text-[#0a3144] bg-white hover:bg-[#0a3144] hover:text-white hover:border-[#0a3144] transition-all duration-200 no-underline">
+            Ver todos los convenios
+            <span class="text-[1rem] leading-none">→</span>
+          </router-link>
         </div>
       </div>
     </section>
 
     <!-- NOTICIAS -->
-    <section class="bg-[#0a3144] py-0">
-      <div class="max-w-[1200px] mx-auto px-6 py-16">
-        <div class="flex justify-between items-end mb-10 flex-wrap gap-4 max-md:flex-col max-md:items-start">
+    <section class="bg-[#0a3144]">
+      <div class="max-w-[1200px] mx-auto px-6 py-24 max-md:py-16">
+
+        <div v-reveal class="flex justify-between items-end mb-14 max-md:mb-10 flex-wrap gap-4 max-md:flex-col max-md:items-start">
           <div>
-            <span class="inline-block bg-[#fbc02d] text-[#1e2a3e] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-4 rounded-sm">ACTUALIDAD</span>
-            <h2 class="text-[2.4rem] max-md:text-[1.8rem] font-bold text-white m-0 leading-[1.1]">Últimas Noticias</h2>
+            <span class="inline-block bg-[#fbc02d] text-[#1e2a3e] font-bold text-[0.7rem] tracking-[2px] py-[0.4rem] px-[0.9rem] mb-5 rounded-sm">ACTUALIDAD</span>
+            <h2 class="text-[2.4rem] max-md:text-[1.8rem] max-[480px]:text-[1.6rem] font-semibold text-white m-0 mb-2 leading-[1.1]">Últimas Noticias</h2>
+            <p class="text-white/60 m-0 text-[0.92rem] leading-relaxed">Lo más reciente de nuestra comunidad educativa.</p>
           </div>
-          <a href="#" class="flex items-center gap-[0.4rem] text-[#fbc02d] no-underline text-[0.9rem] font-semibold transition-all duration-200 hover:gap-[0.7rem]">
+          <router-link to="/news" class="flex items-center gap-2 text-[#fbc02d] no-underline text-[0.88rem] font-semibold transition-all duration-200 hover:gap-3 flex-shrink-0">
             Ver todas <span>→</span>
-          </a>
+          </router-link>
         </div>
 
-        <div class="grid grid-cols-3 max-[992px]:grid-cols-1 gap-6">
+        <div class="grid grid-cols-3 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1 gap-6 max-md:gap-4">
           <article
-            v-for="(img, i) in noticiaImagenes"
-            :key="i"
+            v-for="(noticia, i) in noticias"
+            :key="noticia.titulo"
+            v-reveal="i * 100"
             class="bg-[#06263a] rounded-lg overflow-hidden flex flex-col transition-transform duration-200 hover:-translate-y-1"
           >
             <div
-              class="h-[180px] bg-[#1a2f3a] flex items-start justify-start p-3"
-              :style="noticiaImg(i)"
+              class="h-[200px] flex items-start justify-start p-3"
+              :style="noticiaImg(noticia.imagen)"
             >
-              <span class="bg-[#fbc02d] text-[#1e2a3e] text-[0.65rem] font-bold tracking-[1.2px] py-[0.3rem] px-[0.7rem] rounded-sm relative z-10">
-                {{ ['INSTITUCIONAL', 'ACADÉMICO', 'ACTIVIDADES'][i] }}
+              <span class="bg-[#fbc02d] text-[#1e2a3e] text-[0.65rem] font-bold tracking-[1.2px] py-[0.3rem] px-[0.7rem] rounded-sm">
+                {{ noticia.categoria }}
               </span>
             </div>
-            <div class="p-5 flex flex-col gap-3 flex-1">
-              <h3 class="text-[1.05rem] font-bold text-white m-0 leading-[1.3]">
-                {{ ['Inauguración del Año Escolar 2026', 'Logros destacados en las Olimpiadas', 'Taller de Innovación Tecnológica'][i] }}
+            <div class="p-5 flex flex-col flex-1">
+              <span class="text-white/40 text-[0.72rem] font-medium tracking-[0.5px] mb-3">{{ noticia.fecha }}</span>
+              <h3 class="text-[1rem] font-semibold text-white m-0 mb-3 leading-[1.35] flex-1">
+                {{ noticia.titulo }}
               </h3>
-              <p class="text-[0.82rem] text-[#b6c2cc] leading-relaxed m-0 flex-1">
-                {{ ['Damos la bienvenida a toda nuestra comunidad educativa en este nuevo ciclo lleno de retos y aprendizajes...', 'Nuestros estudiantes obtuvieron los primeros puestos en el concurso regional de matemáticas y ciencias...', 'Se realizó con éxito el primer seminario de herramientas digitales aplicadas a la educación para padres...'][i] }}
+              <p class="text-[0.82rem] text-[#b6c2cc] leading-relaxed m-0 mb-4">
+                {{ noticia.resumen }}
               </p>
-              <a href="#" class="inline-flex items-center gap-[0.3rem] text-[#fbc02d] no-underline text-[0.8rem] font-bold mt-1 hover:underline">
+              <router-link :to="`/news/${noticia.id}`" class="inline-flex items-center gap-1 text-[#fbc02d] no-underline text-[0.8rem] font-semibold hover:gap-2 transition-all duration-200">
                 Leer más <span class="text-[0.9rem]">›</span>
-              </a>
+              </router-link>
             </div>
           </article>
         </div>
@@ -211,6 +234,12 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import heroImg from '@/assets/PortadaSRWEB.png'
+import { useSeo } from '../composables/useSeo'
+
+useSeo({
+  description: 'I.E. Santa Rosa, Tarapoto — institución educativa con más de seis décadas formando estudiantes con valores, excelencia académica y compromiso con el futuro de San Martín.',
+  path: '/',
+})
 
 // ── Hero carousel ─────────────────────────────────────────────────────────
 const heroImages = [
@@ -222,7 +251,7 @@ const heroImages = [
 
 const heroSlides = [
   {
-    eyebrow: 'Institución Educativa Santa Rosa',
+    eyebrow: 'Educación Secundaria',
     title:    'Forjando líderes',
     subtitle: 'con valores',
     desc:     'Educamos con vocación y compromiso, formando personas íntegras preparadas para transformar su entorno con fe, ciencia y disciplina.',
@@ -259,20 +288,41 @@ onUnmounted(() => clearInterval(slideTimer))
 
 // ── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
-  { value: '35+',  label: 'Años de historia' },
-  { value: '600+', label: 'Estudiantes'       },
-  { value: '40+',  label: 'Docentes'          },
+  { value: '67+',  label: 'Años' },
+  { value: '1300+', label: 'Estudiantes'       },
+  { value: '60+',  label: 'Docentes'          },
 ]
 
 // ── Noticias ──────────────────────────────────────────────────────────────
-const noticiaImagenes = [
-  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&q=80',
-  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80',
-  'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&q=80',
+const noticias = [
+  {
+    id: 1,
+    categoria: 'INSTITUCIONAL',
+    titulo: 'Inauguración del Año Escolar 2026',
+    fecha: '15 Mar 2026',
+    resumen: 'Damos la bienvenida a toda nuestra comunidad educativa en este nuevo ciclo lleno de retos y aprendizajes.',
+    imagen: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&q=80',
+  },
+  {
+    id: 2,
+    categoria: 'ACADÉMICO',
+    titulo: 'Logros destacados en las Olimpiadas',
+    fecha: '8 Mar 2026',
+    resumen: 'Nuestros estudiantes obtuvieron los primeros puestos en el concurso regional de matemáticas y ciencias.',
+    imagen: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop&q=80',
+  },
+  {
+    id: 3,
+    categoria: 'ACTIVIDADES',
+    titulo: 'Taller de Innovación Tecnológica',
+    fecha: '2 Mar 2026',
+    resumen: 'Se realizó con éxito el primer seminario de herramientas digitales aplicadas a la educación para padres.',
+    imagen: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&q=80',
+  },
 ]
 
-const noticiaImg = (i) => ({
-  backgroundImage: `linear-gradient(rgba(10,49,68,0.55), rgba(10,49,68,0.55)), url(${noticiaImagenes[i]})`,
+const noticiaImg = (url) => ({
+  backgroundImage: `linear-gradient(rgba(10,49,68,0.55), rgba(10,49,68,0.55)), url(${url})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 })

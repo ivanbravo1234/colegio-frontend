@@ -1,11 +1,12 @@
 <script setup>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-// No necesitas importar Inicio aquí porque el router se encargará de mostrarlo cuando la ruta sea '/'
+import AppAlert from './components/AppAlert.vue'
 </script>
 
 <template>
   <Header />
-  <router-view />  <!-- <-- Cambia esto -->
+  <router-view />
   <Footer />
+  <AppAlert />
 </template>

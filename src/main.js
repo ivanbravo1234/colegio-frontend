@@ -1,9 +1,17 @@
 import { createApp } from 'vue'
+import { createUnhead, headSymbol } from '@unhead/vue'
 import App from './App.vue'
-import router from './router' // Importa la configuración del router
+import router from './router'
+import revealDirective from './directives/reveal.js'
 import './style.css'
 console.log('BASE URL:', import.meta.env.VITE_API_BASE_URL)
 
-createApp(App)
-	.use(router) // Registra el router en la app
-	.mount('#app')
+const app = createApp(App)
+const head = createUnhead()
+
+app.provide(headSymbol, head)
+
+app
+  .use(router)
+  .directive('reveal', revealDirective)
+  .mount('#app')

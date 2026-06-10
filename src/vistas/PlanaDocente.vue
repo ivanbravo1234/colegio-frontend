@@ -1,17 +1,14 @@
 <template>
-  <div class="bg-white text-[#1e2a3e] py-12 pb-16">
-    <div class="max-w-[1200px] mx-auto px-6 max-[480px]:px-4">
+  <div class="bg-white text-[#1e2a3e] pb-24 max-md:pb-16">
 
-      <!-- Encabezado -->
-      <div class="text-center mb-10">
-        <span class="inline-block bg-[#fbc02d] text-[#1e2a3e] text-[0.7rem] font-extrabold tracking-[2px] py-[0.4rem] px-[0.9rem] rounded-sm mb-3">NUESTRO EQUIPO</span>
-        <h1 class="relative inline-block text-[2.6rem] max-md:text-[2rem] max-[480px]:text-[1.8rem] font-black text-[#1e2a3e] m-0 mb-3 tracking-tight after:block after:w-[70px] after:h-1 after:bg-[#fbc02d] after:rounded-full after:mx-auto after:mt-2">
-          Plana Docente
-        </h1>
-        <p class="text-[#4a6177] max-w-[700px] mx-auto text-[0.95rem] leading-[1.55] mt-2">
-          Conoce al equipo de profesionales altamente calificados que lideran el aprendizaje y la formación integral de nuestras estudiantes, impulsando la excelencia académica con vocación y compromiso.
-        </p>
-      </div>
+    <PageHero
+      badge="NUESTRO EQUIPO"
+      title="Plana Docente"
+      description="Conoce al equipo de profesionales altamente calificados que lideran el aprendizaje y la formación integral de nuestros estudiantes."
+      :breadcrumb="[{ label: 'Nuestro Colegio' }, { label: 'Plana Docente' }]"
+    />
+
+    <div class="max-w-[1200px] mx-auto px-6 max-[480px]:px-4 pt-14 max-md:pt-10">
 
       <!-- Filtros -->
       <div class="flex flex-wrap gap-3 items-center justify-center mb-6 bg-[#f9fafc] px-6 py-4 rounded-[14px] border border-[#eef2f6] shadow-[0_1px_3px_rgba(0,0,0,0.04)] max-md:flex-col max-md:items-stretch">
@@ -40,7 +37,7 @@
         </div>
         <button
           @click="aplicarFiltros"
-          class="inline-flex items-center gap-2 px-6 py-[0.7rem] text-[0.88rem] font-bold rounded-lg bg-[#fbc02d] text-[#1e2a3e] border-0 hover:bg-[#f5b81b] hover:-translate-y-px transition-all duration-200 cursor-pointer font-[inherit]"
+          class="inline-flex items-center gap-2 px-6 py-[0.7rem] text-[0.88rem] font-semibold rounded-lg bg-[#fbc02d] text-[#1e2a3e] border-0 hover:bg-[#f5b81b] hover:-translate-y-px transition-all duration-200 cursor-pointer font-[inherit]"
         >Filtrar</button>
         <button
           v-if="filtroActivo.busqueda || filtroActivo.area"
@@ -72,12 +69,12 @@
             />
           </div>
           <div class="p-4 flex flex-col gap-1 flex-1">
-            <p class="text-[0.7rem] font-extrabold text-[#b7791f] uppercase tracking-[1px] m-0 mb-1">{{ docente.area }}</p>
-            <h3 class="text-[1.05rem] font-extrabold text-[#1e2a3e] m-0 mb-1 tracking-tight">{{ docente.nombre }}</h3>
+            <p class="text-[0.7rem] font-semibold text-[#b7791f] uppercase tracking-[1px] m-0 mb-1">{{ docente.area }}</p>
+            <h3 class="text-[1.05rem] font-semibold text-[#1e2a3e] m-0 mb-1 tracking-tight">{{ docente.nombre }}</h3>
             <p class="text-[#4a6177] text-[0.85rem] leading-[1.4] m-0 flex-1 mb-2">{{ docente.grado }}</p>
             <a
               href="#"
-              class="inline-flex items-center gap-[0.3rem] text-[#1e2a3e] no-underline text-[0.72rem] font-extrabold tracking-[1px] pt-[0.6rem] border-t border-[#eef2f6] transition-all duration-200 hover:text-[#b7791f] hover:gap-[0.5rem]"
+              class="inline-flex items-center gap-[0.3rem] text-[#1e2a3e] no-underline text-[0.72rem] font-semibold tracking-[1px] pt-[0.6rem] border-t border-[#eef2f6] transition-all duration-200 hover:text-[#b7791f] hover:gap-[0.5rem]"
             >
               VER PERFIL <span>→</span>
             </a>
@@ -99,6 +96,14 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import PageHero from '../components/PageHero.vue'
+import { useSeo } from '../composables/useSeo'
+
+useSeo({
+  title: 'Plana Docente',
+  description: 'Conoce a los docentes de la I.E. Santa Rosa en Tarapoto: profesionales calificados comprometidos con la formación integral de nuestros estudiantes.',
+  path: '/plana-docente',
+})
 
 const areasDisponibles = ['Comunicación', 'Matemática', 'Ciencias Sociales', 'Educación Física', 'Arte', 'Educación para el Trabajo', 'Ciencia y Tecnología', 'Inglés']
 
